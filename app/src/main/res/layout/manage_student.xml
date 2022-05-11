@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtStudentID"
+        android:ems="10"
+        android:hint="Mã số sinh viên"
+        android:inputType="number">
+        <requestFocus/>
+    </EditText>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtTen"
+        android:ems="10"
+        android:hint="Tên sinh viên"
+        android:inputType="textPersonName"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtPhone"
+        android:ems="10"
+        android:hint="Số điện thoại"
+        android:inputType="number">
+    </EditText>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtAddress"
+        android:ems="10"
+        android:hint="Địa chỉ"
+        android:inputType="textPostalAddress">
+    </EditText>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:id="@+id/btnThem"
+            android:text="Thêm"/>
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:id="@+id/btnXoa"
+            android:text="Xóa"/>
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+
+            android:layout_margin="10dp"
+            android:id="@+id/btnSua"
+            android:text="Sửa"/>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtS_StudentID"
+        android:ems="10"
+        android:hint="Mã số sinh viên"
+        android:inputType="number">
+        <requestFocus/>
+    </EditText>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtS_CourseName"
+        android:ems="10"
+        android:hint="Tên môn học"
+        android:inputType="textPersonName"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtScore"
+        android:ems="10"
+        android:hint="Diểmd"
+        android:inputType="number">
+    </EditText>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtDes"
+        android:ems="10"
+        android:hint="Mô tả"
+        android:inputType="textPostalAddress">
+    </EditText>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:id="@+id/btnAddCourse"
+            android:text="Thêm"/>
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_margin="10dp"
+            android:id="@+id/btnDeleteCourse"
+            android:text="Xóa"/>
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+
+            android:layout_margin="10dp"
+            android:id="@+id/btnEditCourse"
+            android:text="Sửa"/>
+    </LinearLayout>
+</LinearLayout>
