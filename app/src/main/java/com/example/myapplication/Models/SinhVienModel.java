@@ -1,10 +1,25 @@
 package com.example.myapplication.Models;
+import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
+import android.os.Bundle;
+import android.widget.Button;
+import android.view.View;
+import android.widget.DatePicker;
+import java.util.Calendar;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.myapplication.R;
 
 import java.util.Date;
 
-public class SinhVienModel {
-    private int ID;
+public class SinhVienModel  {
 
+
+
+    private int ID;
     private String name;
     private boolean sex;
     private String dob;
@@ -15,6 +30,7 @@ public class SinhVienModel {
         this.sex = sex;
         this.dob = dob;
     }
+
 
     @Override
     public String toString() {
@@ -33,6 +49,7 @@ public class SinhVienModel {
 
     public SinhVienModel() {
     }
+    //Lấy ngày hiện tại
 
     public int getID() {
         return ID;

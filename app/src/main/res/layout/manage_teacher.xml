@@ -4,12 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
-
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Quản lý điểm"
+        android:text="Quản lý giảng viên"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
         android:layout_span="5"
@@ -18,11 +17,19 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtScore"
+        android:id="@+id/txtTeacherMail"
         android:ems="10"
-        android:hint="Diểmd"
-        android:inputType="number">
+        android:hint="Email giảng viên"
+        android:inputType="textEmailAddress">
+        <requestFocus/>
     </EditText>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtCourseName"
+        android:ems="10"
+        android:hint="Tên môn học"
+        android:inputType="textPersonName"/>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,20 +39,20 @@
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
-            android:id="@+id/btnAddCourse"
+            android:id="@+id/btnAddTeacher"
             android:text="Thêm"/>
         <Button
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
-            android:id="@+id/btnDeleteCourse"
+            android:id="@+id/btnDeleteTeacher"
             android:text="Xóa"/>
         <Button
             android:layout_width="100dp"
             android:layout_height="60dp"
 
             android:layout_margin="10dp"
-            android:id="@+id/btnEditCourse"
+            android:id="@+id/btnEditTeacher"
             android:text="Sửa"/>
     </LinearLayout>
 </LinearLayout>

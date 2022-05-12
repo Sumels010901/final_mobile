@@ -4,6 +4,16 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     >
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Quản lý môn học"
+        android:textColor="#FFFFFF"
+        android:textSize="20dp"
+        android:layout_span="5"
+        android:layout_marginBottom="10dp"
+        android:background="#2c4a4a"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,13 +30,30 @@
         android:ems="10"
         android:hint="Tên môn học"
         android:inputType="textPersonName"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtTeacherID"
+        android:ems="10"
+        android:hint="Mã giảng viên"
+        android:inputType="number">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/txtTeacherName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Tên giảng viên"
+        android:inputType="textPersonName" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtPeriod"
+        android:id="@+id/txtSL_SV"
         android:ems="10"
-        android:hint="Thời lượng"
+        android:hint="Số lượng sinh viên"
         android:inputType="number">
     </EditText>
     <EditText
