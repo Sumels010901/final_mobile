@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import com.example.myapplication.Models.BangDiemModel;
 import com.example.myapplication.Models.GiangVienModel;
 import com.example.myapplication.Models.MonHocModel;
 import com.example.myapplication.Models.SinhVienModel;
@@ -33,6 +34,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String GIANGVIEN_TABLE = "GIANGVIEN_TABLE";
     public static final String EMAIL_GV = "EMAIL_GV";
     public static final String KN_GV = "KN_GV";
+    public static final String BANGDIEM_TABLE = "BANGDIEM_TABLE";
+    public static final String DIEM = "DIEM";
 
     public DBHelper(@Nullable Context context) {
         super(context, "final_sinhvien.db", null, 1);
@@ -51,6 +54,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String createTableGiangVienStatement ="CREATE TABLE " + GIANGVIEN_TABLE + " (" + ID_GV + " INTEGER PRIMARY KEY, " + TEN_GV + " TEXT, " + EMAIL_GV + " TEXT, " + KN_GV + " INT)";
         db.execSQL(createTableGiangVienStatement);
+
+        String createTableDiemStatement = "CREATE TABLE " + BANGDIEM_TABLE + " (" + ID_SV + " INTEGER PRIMARY KEY, " + ID_MH + " INT, " + DIEM + " DOUBLE)";
+        db.execSQL(createTableDiemStatement);
     }
 
     @Override
@@ -326,6 +332,97 @@ public class DBHelper extends SQLiteOpenHelper {
                 String taikhoanPASS = cursor.getString(1);
                 TaiKhoanModel newtaikhoan = new TaiKhoanModel(taikhoanID, taikhoanPASS);
                 returnList.add(newtaikhoan);
+            } while(cursor.moveToNext());
+        } else {
+            //failed, do nothing
+        }
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
+    // THAO TAC BANG DIEM
+
+    public boolean themBangDiem (BangDiemModel bangdiem) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(ID_SV, bangdiem.getID_SV());
+        cv.put(ID_MH, bangdiem.getID_MH());
+        cv.put(DIEM, bangdiem.getDiem());
+
+        long insert = db.insert(BANGDIEM_TABLE, null, cv);
+        if(insert == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    public boolean capNhatBangDiem(BangDiemModel bangdiem){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(ID_MH, bangdiem.getID_MH());
+        cv.put(DIEM, bangdiem.getDiem());
+
+        long update = db.update(BANGDIEM_TABLE, cv, ID_SV+" = "+bangdiem.getID_SV(),null);
+        if(update == -1) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+    public boolean xoaBangDiem(BangDiemModel bangdiem){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        long delete = db.delete(BANGDIEM_TABLE, ID_SV+" = "+bangdiem.getID_SV(), null);
+        if(delete == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    public ArrayList<BangDiemModel> BangDiem_SV(SinhVienModel sinhvien){
+        ArrayList<BangDiemModel> returnList = new ArrayList<>();
+
+        String queryString = "SELECT * FROM " + BANGDIEM_TABLE + " WHERE " + ID_SV + " = " + sinhvien.getID();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+        if(cursor.moveToFirst()){
+            //loop through the cursor (result set) and create new bangdiem objects
+            do {
+                int sinhvienID = cursor.getInt(0);
+                int monhocID = cursor.getInt(1);
+                double diem = cursor.getDouble(2);
+                BangDiemModel newbangdiem = new BangDiemModel(sinhvienID, monhocID, diem);
+                returnList.add(newbangdiem);
+            } while(cursor.moveToNext());
+        } else {
+            //failed, do nothing
+        }
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+    public ArrayList<BangDiemModel> BangDiem_MH(MonHocModel monhoc){
+        ArrayList<BangDiemModel> returnList = new ArrayList<>();
+
+        String queryString = "SELECT * FROM " + BANGDIEM_TABLE + " WHERE " + ID_MH + " = " + monhoc.getID_monhoc();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+        if(cursor.moveToFirst()){
+            //loop through the cursor (result set) and create new bangdiem objects
+            do {
+                int sinhvienID = cursor.getInt(0);
+                int monhocID = cursor.getInt(1);
+                double diem = cursor.getDouble(2);
+                BangDiemModel newbangdiem = new BangDiemModel(sinhvienID, monhocID, diem);
+                returnList.add(newbangdiem);
             } while(cursor.moveToNext());
         } else {
             //failed, do nothing
