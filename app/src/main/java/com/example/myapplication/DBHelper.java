@@ -12,6 +12,7 @@ import com.example.myapplication.Models.BangDiemModel;
 import com.example.myapplication.Models.GiangVienModel;
 import com.example.myapplication.Models.MonHocModel;
 import com.example.myapplication.Models.SinhVienModel;
+import com.example.myapplication.Models.SinhVien_MonHoc;
 import com.example.myapplication.Models.TaiKhoanModel;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String KN_GV = "KN_GV";
     public static final String BANGDIEM_TABLE = "BANGDIEM_TABLE";
     public static final String DIEM = "DIEM";
+    public static final String SV_MH_TABLE = "SV_MH_TABLE";
 
     public DBHelper(@Nullable Context context) {
         super(context, "final_sinhvien.db", null, 1);
@@ -55,8 +57,11 @@ public class DBHelper extends SQLiteOpenHelper {
         String createTableGiangVienStatement ="CREATE TABLE " + GIANGVIEN_TABLE + " (" + ID_GV + " INTEGER PRIMARY KEY, " + TEN_GV + " TEXT, " + EMAIL_GV + " TEXT, " + KN_GV + " INT)";
         db.execSQL(createTableGiangVienStatement);
 
-        String createTableDiemStatement = "CREATE TABLE " + BANGDIEM_TABLE + " (" + ID_SV + " INTEGER PRIMARY KEY, " + ID_MH + " INT, " + DIEM + " DOUBLE)";
+        String createTableDiemStatement = "CREATE TABLE " + BANGDIEM_TABLE + " (" + ID_SV + " INTEGER PRIMARY KEY, " + ID_MH + " INTEGER, " + DIEM + " DOUBLE)";
         db.execSQL(createTableDiemStatement);
+
+        String createTableSVMHStatement = "CREATE TABLE " + SV_MH_TABLE + " (" + ID_SV + " INTEGER, " + ID_MH + " INTEGER, CONSTRAINT SV_hoc_MH FOREIGN KEY (" + ID_SV +") REFERENCES " + SINHVIEN_TABLE + " (" + ID_SV + "), CONSTRAINT MH_chua_SV FOREIGN KEY (" + ID_MH + ") REFERENCES " + MONHOC_TABLE + " (" + ID_MH + "))";
+        db.execSQL(createTableSVMHStatement);
     }
 
     @Override
@@ -184,6 +189,33 @@ public class DBHelper extends SQLiteOpenHelper {
         ArrayList<MonHocModel> returnList = new ArrayList<>();
 
         String queryString = "SELECT * FROM " + MONHOC_TABLE;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+        if(cursor.moveToFirst()){
+            //loop through the cursor (result set) and create new monhoc objects
+            do {
+                int monhocID = cursor.getInt(0);
+                String monhocName = cursor.getString(1);
+                int soluongSV = cursor.getInt(2);
+                int giangvienID = cursor.getInt(3);
+                String giangvienName = cursor.getString(4);
+                String TKB = cursor.getString(5);
+                MonHocModel newmonhoc = new MonHocModel(monhocID, monhocName, soluongSV, giangvienID, giangvienName, TKB);
+                returnList.add(newmonhoc);
+            } while(cursor.moveToNext());
+        } else {
+            //failed, do nothing
+        }
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+    public ArrayList<MonHocModel> monhoc_GV(GiangVienModel giangvien) {
+        ArrayList<MonHocModel> returnList = new ArrayList<>();
+
+        String queryString = "SELECT * FROM " + MONHOC_TABLE + " WHERE " + ID_GV + " = " + giangvien.getID_giangvien();
 
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -423,6 +455,79 @@ public class DBHelper extends SQLiteOpenHelper {
                 double diem = cursor.getDouble(2);
                 BangDiemModel newbangdiem = new BangDiemModel(sinhvienID, monhocID, diem);
                 returnList.add(newbangdiem);
+            } while(cursor.moveToNext());
+        } else {
+            //failed, do nothing
+        }
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+
+    // THAO TAC BANG SINHVIEN_MONHOC
+
+    public boolean themLuotHoc (SinhVien_MonHoc svmh){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+
+        cv.put(ID_SV, svmh.getID_SV());
+        cv.put(ID_MH, svmh.getID_MH());
+
+        long insert = db.insert(SV_MH_TABLE, null, cv);
+        if(insert == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    public boolean xoaLuotHoc(SinhVien_MonHoc svmh){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        long delete = db.delete(SV_MH_TABLE, ID_SV+" = "+svmh.getID_SV(), null);
+        if(delete == -1) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    public ArrayList<SinhVien_MonHoc> CacMonHoc_SinhVien(SinhVienModel sinhvien){
+        ArrayList<SinhVien_MonHoc> returnList = new ArrayList<>();
+
+        String queryString = "SELECT * FROM " + SV_MH_TABLE + " WHERE " + ID_SV + " = " + sinhvien.getID();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+        if(cursor.moveToFirst()){
+            //loop through the cursor (result set) and create new bangdiem objects
+            do {
+                int sinhvienID = cursor.getInt(0);
+                int monhocID = cursor.getInt(1);
+                SinhVien_MonHoc newbangdiem = new SinhVien_MonHoc(sinhvienID, monhocID);
+                returnList.add(newbangdiem);
+            } while(cursor.moveToNext());
+        } else {
+            //failed, do nothing
+        }
+        cursor.close();
+        db.close();
+        return returnList;
+    }
+    public ArrayList<SinhVien_MonHoc> DanhSachSV_MonHoc(MonHocModel monhoc){
+        ArrayList<SinhVien_MonHoc> returnList = new ArrayList<>();
+
+        String queryString = "SELECT * FROM " + SV_MH_TABLE + " WHERE " + ID_MH + " = " + monhoc.getID_monhoc();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+        if(cursor.moveToFirst()){
+            //loop through the cursor (result set) and create new bangdiem objects
+            do {
+                int sinhvienID = cursor.getInt(0);
+                int monhocID = cursor.getInt(1);
+                SinhVien_MonHoc newsvmh = new SinhVien_MonHoc(sinhvienID, monhocID);
+                returnList.add(newsvmh);
             } while(cursor.moveToNext());
         } else {
             //failed, do nothing
