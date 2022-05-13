@@ -14,7 +14,8 @@ import java.util.Calendar;
 public class SInhVienActivity extends AppCompatActivity {
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
-
+    String DoB = ""; // Trả về giá trị ngày tháng năm theo kiểu chuỗi,
+    // đã tạo event để gán nên chỉ cần lấy cho vào db khi nhấn button thoi
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -48,6 +49,7 @@ public class SInhVienActivity extends AppCompatActivity {
                 month = month + 1;
                 String date = makeDateString(day, month, year);
                 dateButton.setText(date);
+                DoB = makeDateString(day, month, year);
             }
         };
 
@@ -65,37 +67,8 @@ public class SInhVienActivity extends AppCompatActivity {
     //trả về kiểu chuỗi của ngày tháng năm đã chọn
     private String makeDateString(int day, int month, int year)
     {
-        return month + "/" + day + "/" + year;
+        return day + "/" + month + "/" + year;
     }
     // Thiết lập kiểu hiển thị của tháng
-    private String getMonthFormat(int month)
-    {
-        if(month == 1)
-            return "JAN";
-        if(month == 2)
-            return "FEB";
-        if(month == 3)
-            return "MAR";
-        if(month == 4)
-            return "APR";
-        if(month == 5)
-            return "MAY";
-        if(month == 6)
-            return "JUN";
-        if(month == 7)
-            return "JUL";
-        if(month == 8)
-            return "AUG";
-        if(month == 9)
-            return "SEP";
-        if(month == 10)
-            return "OCT";
-        if(month == 11)
-            return "NOV";
-        if(month == 12)
-            return "DEC";
 
-        //default should never happen
-        return "JAN";
-    }
 }

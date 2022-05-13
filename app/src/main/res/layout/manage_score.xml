@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Quản lý sinh viên"
+        android:text="Quản lý điểm"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
         android:layout_span="5"
@@ -29,6 +29,23 @@
             android:text="Quay lại"/>
 
     </LinearLayout>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtStudentID"
+        android:ems="10"
+        android:hint="Mã số sinh viên"
+        android:inputType="number">
+        <requestFocus/>
+    </EditText>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtIDCourse"
+        android:ems="10"
+        android:hint="Mã môn học"
+        android:inputType="number">
+    </EditText>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -62,4 +79,9 @@
             android:id="@+id/btnEditCourse"
             android:text="Sửa"/>
     </LinearLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/lvScore"/>
 </LinearLayout>

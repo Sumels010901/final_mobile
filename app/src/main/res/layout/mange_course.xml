@@ -35,7 +35,6 @@
         android:ems="10"
         android:hint="Mã môn học"
         android:inputType="number">
-        <requestFocus/>
     </EditText>
     <EditText
         android:layout_width="match_parent"
@@ -70,14 +69,42 @@
         android:hint="Số lượng sinh viên"
         android:inputType="number">
     </EditText>
-    <EditText
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtDes"
-        android:ems="10"
-        android:hint="Mô tả"
-        android:inputType="textPostalAddress">
-    </EditText>
+        android:layout_marginStart="3dp"
+        android:layout_marginBottom="5dp">
+
+        <TextView
+            android:id="@+id/Day"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:text="Thứ:"
+            android:textSize="17dp" />
+
+        <Spinner
+            android:id="@+id/spinnerDay"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+        <TextView
+            android:id="@+id/TietHoc"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:text="Tiết học:"
+            android:textSize="17dp" />
+
+        <Spinner
+            android:id="@+id/spinnerTietHoc"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+    </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -103,4 +130,9 @@
             android:id="@+id/btnEditCourse"
             android:text="Sửa"/>
     </LinearLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/lvCourse"/>
 </LinearLayout>

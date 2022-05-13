@@ -31,13 +31,13 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String ID_GV = "ID_GV";
     public static final String TEN_GV = "TEN_GV";
     public static final String SOLUONG_SV = "SL_SV";
-    public static final String TKB_MH = "TKB_MH";
+    public static final String TKB_MH = "TKB_MH";//*
     public static final String GIANGVIEN_TABLE = "GIANGVIEN_TABLE";
     public static final String EMAIL_GV = "EMAIL_GV";
-    public static final String KN_GV = "KN_GV";
+    public static final String KN_GV = "KN_GV";//*
     public static final String BANGDIEM_TABLE = "BANGDIEM_TABLE";
     public static final String DIEM = "DIEM";
-    public static final String SV_MH_TABLE = "SV_MH_TABLE";
+    public static final String SV_MH_TABLE = "SV_MH_TABLE";//*
 
     public DBHelper(@Nullable Context context) {
         super(context, "final_sinhvien.db", null, 1);

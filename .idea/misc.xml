@@ -11,11 +11,15 @@
         <entry key="..\:/IT Course/Mobile/QLSV/app/src/main/res/layout/mange_course.xml" value="0.11730072463768115" />
         <entry key="..\:/IT Course/Mobile/final_mobile/app/src/main/res/layout/activity_a.xml" value="0.20052083333333334" />
         <entry key="..\:/IT Course/Mobile/final_mobile/app/src/main/res/layout/activity_main.xml" value="0.12681159420289856" />
+        <entry key="..\:/IT Course/Mobile/final_mobile/app/src/main/res/layout/course_item_lv.xml" value="0.20104166666666667" />
+        <entry key="..\:/IT Course/Mobile/final_mobile/app/src/main/res/layout/gv_item_lv.xml" value="0.20104166666666667" />
         <entry key="..\:/IT Course/Mobile/final_mobile/app/src/main/res/layout/main_manage.xml" value="0.1" />
         <entry key="..\:/IT Course/Mobile/final_mobile/app/src/main/res/layout/manage_score.xml" value="0.264" />
         <entry key="..\:/IT Course/Mobile/final_mobile/app/src/main/res/layout/manage_student.xml" value="0.264" />
-        <entry key="..\:/IT Course/Mobile/final_mobile/app/src/main/res/layout/manage_teacher.xml" value="0.1" />
-        <entry key="..\:/IT Course/Mobile/final_mobile/app/src/main/res/layout/mange_course.xml" value="0.264" />
+        <entry key="..\:/IT Course/Mobile/final_mobile/app/src/main/res/layout/manage_teacher.xml" value="0.264" />
+        <entry key="..\:/IT Course/Mobile/final_mobile/app/src/main/res/layout/mange_course.xml" value="0.2" />
+        <entry key="..\:/IT Course/Mobile/final_mobile/app/src/main/res/layout/score_item_lv.xml" value="0.20104166666666667" />
+        <entry key="..\:/IT Course/Mobile/final_mobile/app/src/main/res/layout/sv_item_lv.xml" value="0.20052083333333334" />
         <entry key="..\:/Users/USER/HK2 2021 - 2022/lap trinh di dong/QLSV/app/src/main/res/layout/activity_main.xml" value="0.10989583333333333" />
       </map>
     </option>

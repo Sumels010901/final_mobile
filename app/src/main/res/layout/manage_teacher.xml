@@ -31,19 +31,35 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtTeacherMail"
+        android:id="@+id/txtTeacherID"
         android:ems="10"
-        android:hint="Email giảng viên"
-        android:inputType="textEmailAddress">
+        android:hint="Mã giảng viên"
+        android:inputType="number">
         <requestFocus/>
     </EditText>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtCourseName"
+        android:id="@+id/txtTeacherName"
         android:ems="10"
-        android:hint="Tên môn học"
+        android:hint="Tên giảng viên"
         android:inputType="textPersonName"/>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtTeacherMail"
+        android:ems="10"
+        android:hint="Email giảng viên"
+        android:inputType="textEmailAddress">
+    </EditText>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtSoNamGiangDay"
+        android:ems="10"
+        android:hint="Số năm giảng dạy"
+        android:inputType="number">
+    </EditText>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -69,4 +85,9 @@
             android:id="@+id/btnEditTeacher"
             android:text="Sửa"/>
     </LinearLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/lvGV"/>
 </LinearLayout>
