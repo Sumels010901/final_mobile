@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -165,6 +166,18 @@ public class student extends AppCompatActivity {
     }
 
     private void deleteSV() {
+        if(editMSSV.getText().toString().equals("")){
+            Toast.makeText(this, "Hãy chọn 1 sinh viên", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            if (DBHelper.xoaSinhVien(Integer.parseInt(editMSSV.getText().toString()))) {
+                Toast.makeText(this,"Xóa thành công", Toast.LENGTH_SHORT).show();
+                resetForm();
+                listSV.clear();
+                listSV.addAll(DBHelper.getAllSv());
+                adapter.notifyDataSetChanged();
+            }
+        }
     }
 
     private void updateSV() {

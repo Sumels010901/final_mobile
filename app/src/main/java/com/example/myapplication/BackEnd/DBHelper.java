@@ -104,10 +104,10 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
     }
-    public boolean xoaSinhVien(SinhVienModel sinhvien){
+    public boolean xoaSinhVien(int id){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        long delete = db.delete(SINHVIEN_TABLE, "ID = "+sinhvien.getID(), null);
+        long delete = db.delete(SINHVIEN_TABLE, ID_SV +"=?", new String[]{String.valueOf(id)});
         if(delete == -1) {
             return false;
         } else {
