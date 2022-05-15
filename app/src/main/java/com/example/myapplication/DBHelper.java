@@ -25,6 +25,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String NGAYSINH = "DOB";
     public static final String TAIKHOAN_TABLE = "TAIKHOAN_TABLE";
     public static final String PASSWORD = "PASSWORD";
+    public static final String LOAI_TAIKHOAN = "ACC_TYPE";
     public static final String MONHOC_TABLE = "MONHOC_TABLE";
     public static final String ID_MH = "ID_MH";
     public static final String TEN_MH = "TEN_MH";
@@ -48,7 +49,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String createTableSinhVienStatement = "CREATE TABLE " + SINHVIEN_TABLE + " (" + ID_SV + " INTEGER PRIMARY KEY, " + NAME + " TEXT, " + GIOITINH + " BOOL, " + NGAYSINH + " DATE)";
         db.execSQL(createTableSinhVienStatement);
 
-        String createTableTaiKhoanStatement ="CREATE TABLE " + TAIKHOAN_TABLE + " (" + ID_SV + " INTEGER PRIMARY KEY, " + PASSWORD + " TEXT) ";
+        String createTableTaiKhoanStatement ="CREATE TABLE " + TAIKHOAN_TABLE + " (" + ID_SV + " INTEGER PRIMARY KEY, " + PASSWORD + " TEXT, " + LOAI_TAIKHOAN + " INTEGER)";
         db.execSQL(createTableTaiKhoanStatement);
 
         String createTableMonHocStatement ="CREATE TABLE " + MONHOC_TABLE + " (" + ID_MH + " INTEGER PRIMARY KEY, " + TEN_MH + " TEXT, " + ID_GV + " INTEGER, " + TEN_GV + " TEXT, " + SOLUONG_SV + " INT, " + TKB_MH + " DATETIME)";
@@ -362,7 +363,8 @@ public class DBHelper extends SQLiteOpenHelper {
             do {
                 int taikhoanID = cursor.getInt(0);
                 String taikhoanPASS = cursor.getString(1);
-                TaiKhoanModel newtaikhoan = new TaiKhoanModel(taikhoanID, taikhoanPASS);
+                int taikhoanLoai = cursor.getInt(2);
+                TaiKhoanModel newtaikhoan = new TaiKhoanModel(taikhoanID, taikhoanPASS, taikhoanLoai);
                 returnList.add(newtaikhoan);
             } while(cursor.moveToNext());
         } else {
