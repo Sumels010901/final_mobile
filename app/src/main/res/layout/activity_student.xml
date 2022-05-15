@@ -67,7 +67,7 @@
             android:textColor="@color/black"
             style="?android:spinnerStyle"
             android:layout_marginTop="10dp"/>
-            //android:onClick="openDatePicker"/>
+           // android:onClick="openDatePicker"/>
     </LinearLayout>
 
     <LinearLayout
