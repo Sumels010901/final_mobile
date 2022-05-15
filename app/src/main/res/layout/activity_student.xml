@@ -86,26 +86,26 @@
 
         <RadioGroup
             android:id="@+id/radioGroup1"
-            android:layout_width="89dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_span="4"
             android:orientation="horizontal">
 
             <RadioButton
                 android:id="@+id/radNam"
-                android:layout_width="match_parent"
+                android:layout_width="102dp"
                 android:layout_height="wrap_content"
                 android:checked="true"
                 android:text="Nam" />
-
+            <RadioButton
+                android:id="@+id/radNu"
+                android:layout_width="102dp"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:text="Nữ" />
         </RadioGroup>
 
-        <RadioButton
-            android:id="@+id/radNu"
-            android:layout_width="102dp"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="Nữ" />
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"

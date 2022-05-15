@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.RadioGroup;
 
 import com.example.myapplication.R;
 
@@ -15,10 +16,14 @@ import java.util.Calendar;
 
 public class student extends AppCompatActivity {
     Button btnStudentBack;
+    RadioGroup rdgroup;
+
+    //-----------------------------------Cho datetime picker-----------------------------------------
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
     String DoB = ""; // Trả về giá trị ngày tháng năm theo kiểu chuỗi,
     // đã tạo event để gán nên chỉ cần lấy cho vào db khi nhấn button thoi
+    //------------------------------------------------------------------------------------------------
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +35,8 @@ public class student extends AppCompatActivity {
                 finish();
             }
         });
+        rdgroup = findViewById(R.id.radioGroup1);
+        //-----------------------------------Cho datetime picker-----------------------------------------
         initDatePicker();
         dateButton = findViewById(R.id.datePickerButton);
         dateButton.setText(getTodaysDate());
@@ -39,11 +46,23 @@ public class student extends AppCompatActivity {
                 datePickerDialog.show();
             }
         });
+        //------------------------------------------------------------------------------------------------
     }
-    public void openDatePicker(View view)
+    public void AddStudent()
     {
-        datePickerDialog.show();
+        int radid = rdgroup.getCheckedRadioButtonId();
+        String gioitinh = "";
+
+        if(radid == R.id.radNam){
+            gioitinh = "Nam";
+        }
+        else
+        {
+            gioitinh = "Nữ";
+        }
     }
+    //-----------------------------------Cho datetime picker-----------------------------------------
+
     private String getTodaysDate()
     {
         Calendar cal = Calendar.getInstance();
@@ -67,7 +86,6 @@ public class student extends AppCompatActivity {
                 DoB = makeDateString(day, month, year);
             }
         };
-
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);
@@ -84,4 +102,6 @@ public class student extends AppCompatActivity {
     {
         return day + "/" + month + "/" + year;
     }
+    //------------------------------------------------------------------------------------------------
+
 }
