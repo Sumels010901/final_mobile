@@ -21,7 +21,7 @@ public class SinhVienModel  {
 
     private int ID;
     private String name;
-    private boolean sex;
+    private boolean sex;//true: nam; false: nữ
     private String dob;
 
     public SinhVienModel(int ID, String name, boolean sex, String dob) {
