@@ -23,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 public class student extends AppCompatActivity {
-    private EditText editMSSV,editTenSV,editDOB;
+    private EditText editMSSV,editTenSV;
     private RadioGroup rdoBtnSex;
     private RadioButton radioNam, radioNu;
     private Button btnAdd,btnUpdate, btnDelete;
@@ -37,7 +37,7 @@ public class student extends AppCompatActivity {
     //-----------------------------------Cho datetime picker-----------------------------------------
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
-    String DoB = ""; // Trả về giá trị ngày tháng năm theo kiểu chuỗi,
+    String DoB = getTodaysDate(); // Trả về giá trị ngày tháng năm theo kiểu chuỗi,
     // đã tạo event để gán nên chỉ cần lấy cho vào db khi nhấn button thoi
     //------------------------------------------------------------------------------------------------
     @Override
@@ -122,7 +122,21 @@ public class student extends AppCompatActivity {
     private void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         SinhVienModel sinhVien = listSV.get(i);
         editMSSV.setText(String.valueOf(sinhVien.getID()));
-        editTenSV.setText((sinhVien.getName()));
+        editTenSV.setText(sinhVien.getName());
+        String sDob = sinhVien.getDob();
+
+
+        if(sDob.length() > 0) {
+            dateButton.setText(sDob);
+            String spl[] = sDob.split("/");
+            int date = Integer.parseInt(spl[0]);
+            int month = Integer.parseInt(spl[1]);
+            int year = Integer.parseInt(spl[2]);
+            datePickerDialog.updateDate(year, month-1, date);
+        }
+        else dateButton.setText("Không có giá trị");
+
+
         if(sinhVien.isSex())
             radioNam.setChecked(true);
         else radioNu.setChecked(true);
@@ -227,5 +241,13 @@ public class student extends AppCompatActivity {
         editMSSV.setEnabled(true);
         editMSSV.setFocusable(true);
         editMSSV.setFocusableInTouchMode(true);
+
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        month = month + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        datePickerDialog.updateDate(year, month, day);
+        dateButton.setText(makeDateString(day, month, year));
     }
 }
