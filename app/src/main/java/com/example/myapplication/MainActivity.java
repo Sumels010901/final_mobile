@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void switchActivities() {
-        Intent switchActivityIntent = new Intent(this, MainManageActivity.class);
-        startActivity(switchActivityIntent);
+        Intent toHome = new Intent(this, home.class);
+        startActivity(toHome);
     }
 
 }

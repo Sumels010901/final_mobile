@@ -10,6 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
+            android:name=".teacher"
+            android:exported="false" />
+        <activity
+            android:name=".score"
+            android:exported="false" />
+        <activity
+            android:name=".course"
+            android:exported="false" />
+        <activity
+            android:name=".student"
+            android:exported="false" />
+        <activity
+            android:name=".home"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

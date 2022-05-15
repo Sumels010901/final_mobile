@@ -5,14 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SInhVienActivity"
-
-    >
+    tools:context=".course">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Quản lý sinh viên"
+        android:text="Quản lý môn học"
         android:textColor="#FFFFFF"
         android:textSize="20dp"
         android:layout_span="5"
@@ -28,86 +26,86 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
-            android:id="@+id/btnStudentBack"
+            android:id="@+id/btnCourseBack"
             android:text="Quay lại"/>
 
     </LinearLayout>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtStudentID"
+        android:id="@+id/txtIDCourse"
         android:ems="10"
-        android:hint="Mã số sinh viên"
+        android:hint="Mã môn học"
         android:inputType="number">
-        <requestFocus/>
     </EditText>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtTen"
+        android:id="@+id/txtCourseName"
         android:ems="10"
-        android:hint="Tên sinh viên"
+        android:hint="Tên môn học"
         android:inputType="textPersonName"/>
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/sinhNhat"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:text="Sinh nhật: "
-            android:textSize="17dp" />
-        <Button
-            android:id="@+id/datePickerButton"
-            android:layout_width="250dp"
-            android:layout_height="wrap_content"
-            android:text="01/01/2022"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            style="?android:spinnerStyle"
-            android:layout_marginTop="10dp"
-            android:onClick="openDatePicker"/>
-    </LinearLayout>
-
-    <LinearLayout
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="3dp">
+        android:id="@+id/txtTeacherID"
+        android:ems="10"
+        android:hint="Mã giảng viên"
+        android:inputType="number">
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/txtTeacherName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Tên giảng viên"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtSL_SV"
+        android:ems="10"
+        android:hint="Số lượng sinh viên"
+        android:inputType="number">
+    </EditText>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3dp"
+        android:layout_marginBottom="5dp">
 
         <TextView
-            android:id="@+id/gioiTinh"
-            android:layout_width="120dp"
+            android:id="@+id/Day"
+            android:layout_width="50dp"
             android:layout_height="match_parent"
             android:ems="10"
-            android:text="Giới tính: "
+            android:text="Thứ:"
             android:textSize="17dp" />
 
-        <RadioGroup
-            android:id="@+id/radioGroup1"
-            android:layout_width="89dp"
+        <Spinner
+            android:id="@+id/spinnerDay"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_span="4"
-            android:orientation="horizontal">
+            />
+        <TextView
+            android:id="@+id/TietHoc"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:ems="10"
+            android:text="Tiết học:"
+            android:textSize="17dp" />
 
-            <RadioButton
-                android:id="@+id/radNam"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:checked="true"
-                android:text="Nam" />
-
-        </RadioGroup>
-
-        <RadioButton
-            android:id="@+id/radNu"
-            android:layout_width="102dp"
+        <Spinner
+            android:id="@+id/spinnerTietHoc"
+            android:layout_marginTop="5dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="Nữ" />
+            />
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -118,25 +116,25 @@
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
-            android:id="@+id/btnThem"
+            android:id="@+id/btnAddCourse"
             android:text="Thêm"/>
         <Button
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
-            android:id="@+id/btnXoa"
+            android:id="@+id/btnDeleteCourse"
             android:text="Xóa"/>
         <Button
             android:layout_width="100dp"
             android:layout_height="60dp"
 
             android:layout_margin="10dp"
-            android:id="@+id/btnSua"
+            android:id="@+id/btnEditCourse"
             android:text="Sửa"/>
     </LinearLayout>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:id="@+id/lvSV"/>
+        android:id="@+id/lvCourse"/>
 </LinearLayout>
