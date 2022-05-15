@@ -1,15 +1,18 @@
-package com.example.myapplication;
+package com.example.myapplication.BackEnd;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
-import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.myapplication.R;
 
-public class CourseActivity extends AppCompatActivity {
+public class course extends AppCompatActivity {
+    Button btnCourseBack;
     String[] ngay = {"thu 2", "thu 3","thu 4","thu 5","thu 6","thu 7"};
     String[] tiet = {"tiet 1", "tiet 2", "tiet 3", "tiet 4", "tiet 5", "tiet 6"
             , "tiet 7", "tiet 8", "tiet 9", "tiet 10", "tiet 11"};
@@ -18,10 +21,17 @@ public class CourseActivity extends AppCompatActivity {
     String TKB_MH1 = "";
     String TKB_MH2 = "";
     String TKB_MH = ""; // Chuỗi TKB_MH để cho vào db nè
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.activity_course);
+        btnCourseBack = findViewById(R.id.btnCourseBack);
+        btnCourseBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         j_spinner = findViewById(R.id.spinnerDay);
 
         i_spinner = findViewById(R.id.spinnerTietHoc);

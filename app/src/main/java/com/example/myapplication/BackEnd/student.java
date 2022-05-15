@@ -1,4 +1,6 @@
-package com.example.myapplication;
+package com.example.myapplication.BackEnd;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
@@ -7,24 +9,31 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 
-import androidx.appcompat.app.AppCompatActivity;
+import com.example.myapplication.R;
 
 import java.util.Calendar;
 
-public class SInhVienActivity extends AppCompatActivity {
+public class student extends AppCompatActivity {
+    Button btnStudentBack;
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
     String DoB = ""; // Trả về giá trị ngày tháng năm theo kiểu chuỗi,
     // đã tạo event để gán nên chỉ cần lấy cho vào db khi nhấn button thoi
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.manage_student);
+        setContentView(R.layout.activity_student);
+        btnStudentBack = findViewById(R.id.btnStudentBack);
+        btnStudentBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
         initDatePicker();
         dateButton = findViewById(R.id.datePickerButton);
         dateButton.setText(getTodaysDate());
     }
-    //Hiển thị box chọn ngày tháng
     public void openDatePicker(View view)
     {
         datePickerDialog.show();
@@ -69,6 +78,4 @@ public class SInhVienActivity extends AppCompatActivity {
     {
         return day + "/" + month + "/" + year;
     }
-    // Thiết lập kiểu hiển thị của tháng
-
 }

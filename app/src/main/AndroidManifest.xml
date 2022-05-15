@@ -10,22 +10,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
         <activity
-            android:name=".teacher"
+            android:name=".BackEnd.teacher"
             android:exported="false" />
         <activity
-            android:name=".score"
+            android:name=".BackEnd.score"
             android:exported="false" />
         <activity
-            android:name=".course"
+            android:name=".BackEnd.course"
             android:exported="false" />
         <activity
-            android:name=".student"
+            android:name=".BackEnd.student"
             android:exported="false" />
         <activity
-            android:name=".home"
+            android:name=".BackEnd.home"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".BackEnd.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

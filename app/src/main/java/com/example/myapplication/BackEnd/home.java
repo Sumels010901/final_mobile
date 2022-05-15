@@ -1,4 +1,4 @@
-package com.example.myapplication;
+package com.example.myapplication.BackEnd;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,9 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.myapplication.Models.BangDiemModel;
-import com.example.myapplication.Models.MonHocModel;
-import com.example.myapplication.Models.SinhVienModel;
+import com.example.myapplication.R;
 
 public class home extends AppCompatActivity {
     Button btnMngStudent, btnMngScore, btnMngCourse, btnMngTeacher, btnBack;

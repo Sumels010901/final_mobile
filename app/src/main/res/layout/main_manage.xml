@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@drawable/img"
-    tools:context=".MainManageActivity">
+    tools:context=".TempFiles.MainManageActivity">
     <LinearLayout
         android:layout_marginTop="100dp"
         android:layout_width="wrap_content"
