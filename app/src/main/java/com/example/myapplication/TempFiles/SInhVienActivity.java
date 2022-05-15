@@ -6,14 +6,28 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.RadioButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.myapplication.Adapter.SinhVienAdapter;
+import com.example.myapplication.BackEnd.DBHelper;
+import com.example.myapplication.Models.SinhVienModel;
 import com.example.myapplication.R;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class SInhVienActivity extends AppCompatActivity {
+    private EditText editMSSV,editTenSV,editDOB;
+    private RadioButton rdoBtnSex;
+    private Button btnAdd,btnUpdate, btnDelete;
+    private ListView lvSV;
+    private DBHelper sqliteSV;
+    private SinhVienAdapter adapter;
+    private ArrayList<SinhVienModel> listSV;
     private DatePickerDialog datePickerDialog;
     private Button dateButton;
     String DoB = ""; // Trả về giá trị ngày tháng năm theo kiểu chuỗi,
@@ -73,4 +87,20 @@ public class SInhVienActivity extends AppCompatActivity {
     }
     // Thiết lập kiểu hiển thị của tháng
 
+
+    public void init(){
+        editMSSV = findViewById(R.id.);
+        editTenSV = findViewById(R.id.editTenSV);
+        editLop = findViewById(R.id.editLop);
+        btnAdd = findViewById(R.id.btnAdd);
+        btnUpdate = findViewById(R.id.btnUpdate);
+        btnDelete = findViewById(R.id.btnDelete);
+        lvSV = findViewById(R.id.lvSV);
+        sqliteSV = new SqliteSV(this);
+        listSV = sqliteSV.getAllSV();
+        adapter = new SinhVienAdapter(this,R.layout.sv_item_lv,listSV);
+        lvSV.setAdapter(adapter);
+
+
+    }
 }
