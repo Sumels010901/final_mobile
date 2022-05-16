@@ -96,7 +96,7 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put(GIOITINH, sinhvien.isSex());
         cv.put(NGAYSINH, sinhvien.getDob());
 
-        long update = db.update(SINHVIEN_TABLE, cv, "ID ="+sinhvien.getID(),null);
+        long update = db.update(SINHVIEN_TABLE, cv, "ID_SV ="+sinhvien.getID(),null);
         if(update == -1) {
             return false;
         } else {

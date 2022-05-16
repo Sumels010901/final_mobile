@@ -124,9 +124,8 @@ public class student extends AppCompatActivity {
         SinhVienModel sinhVien = listSV.get(i);
         editMSSV.setText(String.valueOf(sinhVien.getID()));
         editTenSV.setText(sinhVien.getName());
+        DoB =sinhVien.getDob();
         String sDob = sinhVien.getDob();
-
-
         if(sDob.length() > 0) {
             dateButton.setText(sDob);
             String spl[] = sDob.split("/");
@@ -181,6 +180,21 @@ public class student extends AppCompatActivity {
     }
 
     private void updateSV() {
+        if(editTenSV.getText().toString().equals("")){
+            Toast.makeText(this,"Hãy nhập tên sv", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            if(DBHelper.capNhatSinhVien(getSvInfo())){
+                Toast.makeText(this,"Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                resetForm();
+                listSV.clear();
+                listSV.addAll(DBHelper.getAllSv());
+                adapter.notifyDataSetChanged();
+            }
+            else {
+                Toast.makeText(this,"Cập nhật thất bại", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
 
@@ -217,8 +231,8 @@ public class student extends AppCompatActivity {
         sinhVien.setSex(rdoBtnSex.getCheckedRadioButtonId()==radioNam.getId());
         sinhVien.setDob(DoB);
         return sinhVien;
-
     }
+
 
     public void init(){
         editMSSV = findViewById(R.id.editID);
@@ -243,7 +257,7 @@ public class student extends AppCompatActivity {
         btnDelete.setEnabled(false);
     }
 
-    // Empty all textview, focus to MaSoSinhVien
+    //
     private void resetForm() {
         editTenSV.setText("");
         editMSSV.setText("");
