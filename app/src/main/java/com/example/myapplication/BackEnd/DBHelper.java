@@ -441,6 +441,31 @@ public class DBHelper extends SQLiteOpenHelper {
             return true;
         }
     }
+    public ArrayList<BangDiemModel> getAllBangDiem(){
+        ArrayList<BangDiemModel> list = new ArrayList<>();
+
+        String queryString = "SELECT * FROM " + BANGDIEM_TABLE;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+        if(cursor.moveToFirst()){
+            //loop through the cursor (result set) and create new sinhvien objects
+            do {
+                BangDiemModel bangDiem = new BangDiemModel();
+                bangDiem.setID_SV(cursor.getInt(0));
+                bangDiem.setID_MH(cursor.getInt(1));
+                bangDiem.setDiem(Float.parseFloat(String.valueOf(cursor.getDouble(2))));
+
+                list.add(bangDiem);
+            } while(cursor.moveToNext());
+        } else {
+            //failed, do nothing
+        }
+        cursor.close();
+        db.close();
+        return list;
+    }
     public ArrayList<BangDiemModel> BangDiem_SV(SinhVienModel sinhvien){
         ArrayList<BangDiemModel> returnList = new ArrayList<>();
 

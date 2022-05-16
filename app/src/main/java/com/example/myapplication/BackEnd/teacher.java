@@ -38,8 +38,8 @@ public class teacher extends AppCompatActivity {
                 finish();
             }
         });
-    } public void init(){
-
+    }
+    public void init(){
         editTeacherID = findViewById(R.id.editTeacherID);
         editTeacherName = findViewById(R.id.editTeacherName);
         editTeacherMail = findViewById(R.id.editTeacherMail);
