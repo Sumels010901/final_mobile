@@ -48,6 +48,14 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/txtSL_SV"
+        android:ems="10"
+        android:hint="Số lượng sinh viên"
+        android:inputType="number">
+    </EditText>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/txtTeacherID"
         android:ems="10"
         android:hint="Mã giảng viên"
@@ -63,14 +71,7 @@
         android:hint="Tên giảng viên"
         android:inputType="textPersonName" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtSL_SV"
-        android:ems="10"
-        android:hint="Số lượng sinh viên"
-        android:inputType="number">
-    </EditText>
+
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -112,12 +113,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:orientation="horizontal">
+
         <Button
+            android:id="@+id/btnAddCourse"
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
-            android:id="@+id/btnAddCourse"
-            android:text="Thêm"/>
+            android:text="Thêm" />
+
         <Button
             android:layout_width="100dp"
             android:layout_height="60dp"

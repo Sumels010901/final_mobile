@@ -64,20 +64,20 @@
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
-            android:id="@+id/btnAddCourse"
+            android:id="@+id/btnAddScore"
             android:text="Thêm"/>
         <Button
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
-            android:id="@+id/btnDeleteCourse"
+            android:id="@+id/btnDeleteScore"
             android:text="Xóa"/>
         <Button
             android:layout_width="100dp"
             android:layout_height="60dp"
 
             android:layout_margin="10dp"
-            android:id="@+id/btnEditCourse"
+            android:id="@+id/btnEditScore"
             android:text="Sửa"/>
     </LinearLayout>
     <ListView

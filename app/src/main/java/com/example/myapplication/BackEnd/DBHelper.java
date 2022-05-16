@@ -164,9 +164,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
         cv.put(ID_MH, monhoc.getID_monhoc());
         cv.put(TEN_MH, monhoc.getTen_monhoc());
+        cv.put(SOLUONG_SV, monhoc.getSoluong_sv());
         cv.put(ID_GV, monhoc.getID_giangvien());
         cv.put(TEN_GV, monhoc.getTen_giangvien());
-        cv.put(SOLUONG_SV, monhoc.getSoluong_sv());
         cv.put(TKB_MH, monhoc.getTKB_monhoc());
         long insert = db.insert(MONHOC_TABLE, null, cv);
         if(insert == -1) {
@@ -180,9 +180,9 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
 
         cv.put(TEN_MH, monhoc.getTen_monhoc());
+        cv.put(SOLUONG_SV, monhoc.getSoluong_sv());
         cv.put(ID_GV, monhoc.getID_giangvien());
         cv.put(TEN_GV, monhoc.getTen_giangvien());
-        cv.put(SOLUONG_SV, monhoc.getSoluong_sv());
         cv.put(TKB_MH, monhoc.getTKB_monhoc());
 
         long update = db.update(MONHOC_TABLE, cv, "ID_MH ="+monhoc.getID_monhoc(),null);
@@ -213,19 +213,16 @@ public class DBHelper extends SQLiteOpenHelper {
         if(cursor.moveToFirst()){
             //loop through the cursor (result set) and create new monhoc objects
             do {
-                int monhocID = cursor.getInt(0);
-                String monhocName = cursor.getString(1);
-                int soluongSV = cursor.getInt(2);
-                int giangvienID = cursor.getInt(3);
-                String giangvienName = cursor.getString(4);
-                String TKB = cursor.getString(5);
-                MonHocModel newmonhoc = new MonHocModel(monhocID, monhocName, soluongSV, giangvienID, giangvienName, TKB);
-                returnList.add(newmonhoc);
+                MonHocModel monhoc = new MonHocModel();
+                monhoc.setID_monhoc(cursor.getInt(0));
+                monhoc.setTen_monhoc(cursor.getString(1));
+                monhoc.setSoluong_sv(cursor.getInt(2));
+                monhoc.setID_giangvien(cursor.getInt(3));
+                monhoc.setTen_giangvien(cursor.getString(4));
+                monhoc.setTKB_monhoc(cursor.getString(5));
+                returnList.add(monhoc);
             } while(cursor.moveToNext());
-        } else {
-            //failed, do nothing
         }
-        cursor.close();
         db.close();
         return returnList;
     }
@@ -309,17 +306,14 @@ public class DBHelper extends SQLiteOpenHelper {
         if(cursor.moveToFirst()){
             //loop through the cursor (result set) and create new giangvien objects
             do {
-                int giangvienID = cursor.getInt(0);
-                String giangvienName = cursor.getString(1);
-                String giangvienEmail = cursor.getString(2);
-                int giangvienKN = cursor.getInt(3);
-                GiangVienModel newgiangvien = new GiangVienModel(giangvienID, giangvienName, giangvienEmail, giangvienKN);
+                GiangVienModel newgiangvien = new GiangVienModel();
+                newgiangvien.setID_giangvien(cursor.getInt(0));
+                newgiangvien.setTen_giangvien(cursor.getString(1));
+                newgiangvien.setEmail_giangvien(cursor.getString(2));
+                newgiangvien.setSonam_giangday(cursor.getInt(3));
                 returnList.add(newgiangvien);
             } while(cursor.moveToNext());
-        } else {
-            //failed, do nothing
         }
-        cursor.close();
         db.close();
         return returnList;
     }
@@ -569,4 +563,3 @@ public class DBHelper extends SQLiteOpenHelper {
         return returnList;
     }
 }
-
