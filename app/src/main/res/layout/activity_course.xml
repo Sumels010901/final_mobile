@@ -37,14 +37,18 @@
         android:ems="10"
         android:hint="Mã môn học"
         android:inputType="number">
+        <requestFocus/>
     </EditText>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtCourseName"
         android:ems="10"
         android:hint="Tên môn học"
-        android:inputType="textPersonName"/>
+        android:inputType="textPersonName">
+    </EditText>
+
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -53,23 +57,24 @@
         android:hint="Số lượng sinh viên"
         android:inputType="number">
     </EditText>
+
     <EditText
+        android:id="@+id/txtTeacherIDCourse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtTeacherID"
         android:ems="10"
         android:hint="Mã giảng viên"
         android:inputType="number">
-
     </EditText>
 
     <EditText
-        android:id="@+id/txtTeacherName"
+        android:id="@+id/txtTeacherNameCourse"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Tên giảng viên"
-        android:inputType="textPersonName" />
+        android:inputType="textPersonName">
+    </EditText>
 
 
     <LinearLayout

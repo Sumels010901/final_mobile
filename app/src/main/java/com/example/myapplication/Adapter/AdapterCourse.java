@@ -1,4 +1,4 @@
-package com.example.myapplication.BackEnd;
+package com.example.myapplication.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -27,7 +27,7 @@ public class AdapterCourse extends ArrayAdapter<MonHocModel> {
         this.listMonHoc = listMonHoc;
     }
     class ViewHolder {
-        TextView tvCourseID, tvCourseName, tvStudentNumber, tvTeacherID, tvTeacherName, tvTKBCourse;
+        TextView tvCourseID, tvCourseName, tvStudentNumber, tvTeacherIDCourse, tvTeacherNameCourse, tvTKBCourse;
     }
 
     @NonNull
@@ -40,8 +40,8 @@ public class AdapterCourse extends ArrayAdapter<MonHocModel> {
             viewHolder.tvCourseID = convertView.findViewById(R.id.tvCourseID);
             viewHolder.tvCourseName = convertView.findViewById(R.id.tvCourseName);
             viewHolder.tvStudentNumber = convertView.findViewById(R.id.tvStudentNumber);
-            viewHolder.tvTeacherID = convertView.findViewById(R.id.tvTeacherID);
-            viewHolder.tvTeacherName = convertView.findViewById(R.id.tvTeacherName);
+            viewHolder.tvTeacherIDCourse = convertView.findViewById(R.id.tvTeacherIDCourse);
+            viewHolder.tvTeacherNameCourse = convertView.findViewById(R.id.tvTeacherNameCourse);
             viewHolder.tvTKBCourse = convertView.findViewById(R.id.tvTKBCourse);
             convertView.setTag(viewHolder);
         }
@@ -49,12 +49,12 @@ public class AdapterCourse extends ArrayAdapter<MonHocModel> {
             viewHolder = (ViewHolder) convertView.getTag();
         }
         MonHocModel monHoc = listMonHoc.get(position);
-        viewHolder.tvCourseID.setText(String.valueOf(monHoc.getID_monhoc()));
+        viewHolder.tvCourseID.setText(String.valueOf(monHoc.getId_monhoc()));
         viewHolder.tvCourseName.setText(String.valueOf(monHoc.getTen_monhoc()));
         viewHolder.tvStudentNumber.setText(String.valueOf(monHoc.getSoluong_sv()));
-        viewHolder.tvTeacherID.setText(String.valueOf(monHoc.getID_giangvien()));
-        viewHolder.tvTeacherName.setText(String.valueOf(monHoc.getTen_giangvien()));
-        viewHolder.tvTKBCourse.setText(String.valueOf(monHoc.getTKB_monhoc()));
+        viewHolder.tvTeacherIDCourse.setText(String.valueOf(monHoc.getId_giangvien()));
+        viewHolder.tvTeacherNameCourse.setText(String.valueOf(monHoc.getTen_giangvien()));
+        viewHolder.tvTKBCourse.setText(String.valueOf(monHoc.getTkb_monhoc()));
         return convertView;
     }
 }
