@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.myapplication.Adapter.AdapterCourse;
+import com.example.myapplication.Models.GiangVienModel;
 import com.example.myapplication.Models.MonHocModel;
 import com.example.myapplication.R;
 
@@ -94,6 +95,7 @@ public class course extends AppCompatActivity {
         txtSL_SV = findViewById(R.id.txtSL_SV);
         txtTeacherIDCourse = findViewById(R.id.txtTeacherIDCourse);
         txtTeacherNameCourse = findViewById(R.id.txtTeacherNameCourse);
+        txtTeacherNameCourse.setEnabled(false);
         btnAddCourse = findViewById(R.id.btnAddCourse);
         btnDeleteCourse = findViewById(R.id.btnDeleteCourse);
         btnEditCourse = findViewById(R.id.btnEditCourse);
@@ -114,8 +116,31 @@ public class course extends AppCompatActivity {
         btnEditCourse.setOnClickListener(this::onClick);
         btnDeleteCourse.setOnClickListener(this::onClick);
         lvCourse.setOnItemClickListener(this::onItemClick);
+        txtTeacherIDCourse.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean b) {
+                if(!b){
+                    String GV_ID = txtTeacherIDCourse.getText().toString();
+                    boolean check = checkGV(GV_ID);
+                    if(!check){
+                        Toast.makeText(course.this, "Giảng viên không tồn tại!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        GiangVienModel giangvien = dbHelper.getGvById(GV_ID);
+                        txtTeacherNameCourse.setText(giangvien.getTen_giangvien());
+                    }
+                }
+            }
+        });
     }
 
+    private boolean checkGV(String GV_ID){
+        GiangVienModel check = dbHelper.getGvById(GV_ID);
+        if(check == null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 
 
     private void onClick(View v) {

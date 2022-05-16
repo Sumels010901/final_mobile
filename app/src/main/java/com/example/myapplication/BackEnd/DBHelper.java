@@ -216,9 +216,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 MonHocModel monhoc = new MonHocModel();
                 monhoc.setId_monhoc(cursor.getInt(0));
                 monhoc.setTen_monhoc(cursor.getString(1));
-                monhoc.setSoluong_sv(cursor.getInt(2));
-                monhoc.setId_giangvien(cursor.getInt(3));
-                monhoc.setTen_giangvien(cursor.getString(4));
+                monhoc.setSoluong_sv(cursor.getInt(4));
+                monhoc.setId_giangvien(cursor.getInt(2));
+                monhoc.setTen_giangvien(cursor.getString(3));
                 monhoc.setTkb_monhoc(cursor.getString(5));
                 returnList.add(monhoc);
             } while(cursor.moveToNext());
