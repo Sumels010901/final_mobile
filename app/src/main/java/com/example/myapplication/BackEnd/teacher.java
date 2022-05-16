@@ -126,8 +126,47 @@ public class teacher extends AppCompatActivity {
     }
 
     private void updateGv() {
+        if (editTeacherID.getText().toString().equals("")) {
+            Toast.makeText(this,"Hãy nhập mã giảng viên", Toast.LENGTH_SHORT).show();
+        }
+        else if(editTeacherName.getText().toString().equals("")){
+            Toast.makeText(this,"Hãy nhập tên giảng viên", Toast.LENGTH_SHORT).show();
+        }
+        else if (editTeacherMail.getText().toString().equals("")) {
+            Toast.makeText(this,"Hãy nhập email", Toast.LENGTH_SHORT).show();
+        }
+        else if (editSoNamGiangDay.getText().toString().equals("")) {
+            Toast.makeText(this,"Hãy nhập kinh nghiệm", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            if(dbHelper.capnhatGiangVien((getGvInfo()))){
+                Toast.makeText(this,"Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                resetForm();
+                listGv.clear();
+                listGv.addAll(dbHelper.getAllGv());
+                adapter.notifyDataSetChanged();
+            }
+            else {
+                Toast.makeText(this,"Cập nhật thất bại", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
+
+
+
     private void deleteGv() {
+        if(editTeacherID.getText().toString().equals("")){
+            Toast.makeText(this, "Hãy chọn giảng viên", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            if (dbHelper.xoaGiangVien(Integer.parseInt(editTeacherID.getText().toString()))) {
+                Toast.makeText(this,"Xóa thành công", Toast.LENGTH_SHORT).show();
+                resetForm();
+                listGv.clear();
+                listGv.addAll(dbHelper.getAllGv());
+                adapter.notifyDataSetChanged();
+            }
+        }
     }
     private void resetForm() {
         editTeacherID.setText("");

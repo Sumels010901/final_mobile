@@ -290,10 +290,10 @@ public class DBHelper extends SQLiteOpenHelper {
             return true;
         }
     }
-    public boolean xoaGiangVien (GiangVienModel giangvien) {
+    public boolean xoaGiangVien (int id) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        long delete = db.delete(GIANGVIEN_TABLE, ID_GV+" = "+giangvien.getID_giangvien(), null);
+        long delete = db.delete(GIANGVIEN_TABLE, ID_GV+" = "+id, null);
         if(delete == -1) {
             return false;
         } else {

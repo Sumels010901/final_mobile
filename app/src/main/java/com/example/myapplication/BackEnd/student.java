@@ -29,7 +29,7 @@ public class student extends AppCompatActivity {
     private RadioButton radioNam, radioNu;
     private Button btnAdd,btnUpdate, btnDelete;
     private ListView lvSV;
-    private DBHelper DBHelper;
+    private DBHelper dbHelper;
     private SinhVienAdapter adapter;
     private ArrayList<SinhVienModel> listSV;
 
@@ -169,11 +169,11 @@ public class student extends AppCompatActivity {
             Toast.makeText(this, "Hãy chọn 1 sinh viên", Toast.LENGTH_SHORT).show();
         }
         else {
-            if (DBHelper.xoaSinhVien(Integer.parseInt(editMSSV.getText().toString()))) {
+            if (dbHelper.xoaSinhVien(Integer.parseInt(editMSSV.getText().toString()))) {
                 Toast.makeText(this,"Xóa thành công", Toast.LENGTH_SHORT).show();
                 resetForm();
                 listSV.clear();
-                listSV.addAll(DBHelper.getAllSv());
+                listSV.addAll(dbHelper.getAllSv());
                 adapter.notifyDataSetChanged();
             }
         }
@@ -184,11 +184,11 @@ public class student extends AppCompatActivity {
             Toast.makeText(this,"Hãy nhập tên sv", Toast.LENGTH_SHORT).show();
         }
         else {
-            if(DBHelper.capNhatSinhVien(getSvInfo())){
+            if(dbHelper.capNhatSinhVien(getSvInfo())){
                 Toast.makeText(this,"Cập nhật thành công", Toast.LENGTH_SHORT).show();
                 resetForm();
                 listSV.clear();
-                listSV.addAll(DBHelper.getAllSv());
+                listSV.addAll(dbHelper.getAllSv());
                 adapter.notifyDataSetChanged();
             }
             else {
@@ -206,15 +206,15 @@ public class student extends AppCompatActivity {
         else if(editTenSV.getText().toString().equals("")){
             Toast.makeText(this,"Hãy nhập tên sv", Toast.LENGTH_SHORT).show();
         }
-        else if (DBHelper.getSvById(editMSSV.getText().toString())!=null){
+        else if (dbHelper.getSvById(editMSSV.getText().toString())!=null){
             Toast.makeText(this,"Mã số này đã được sử dụng", Toast.LENGTH_SHORT).show();
         }
         else {
-            if(DBHelper.themSinhVien(getSvInfo())) {
+            if(dbHelper.themSinhVien(getSvInfo())) {
                 Toast.makeText(this,"Thêm sv thành công", Toast.LENGTH_SHORT).show();
                 resetForm();
                 listSV.clear();
-                listSV.addAll(DBHelper.getAllSv());
+                listSV.addAll(dbHelper.getAllSv());
                 adapter.notifyDataSetChanged();
             }
             else {
@@ -244,8 +244,8 @@ public class student extends AppCompatActivity {
         radioNu = findViewById(R.id.radNu);
         radioNam = findViewById(R.id.radNam);
         lvSV = findViewById(R.id.lvSV);
-        DBHelper = new DBHelper(this);
-        listSV = DBHelper.getAllSv();
+        dbHelper = new DBHelper(this);
+        listSV = dbHelper.getAllSv();
         adapter = new SinhVienAdapter(this,R.layout.sv_item_lv,listSV);
         lvSV.setAdapter(adapter);
 
