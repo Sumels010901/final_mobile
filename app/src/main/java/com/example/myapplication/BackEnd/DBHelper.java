@@ -162,12 +162,12 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(ID_MH, monhoc.getID_monhoc());
+        cv.put(ID_MH, monhoc.getId_monhoc());
         cv.put(TEN_MH, monhoc.getTen_monhoc());
         cv.put(SOLUONG_SV, monhoc.getSoluong_sv());
-        cv.put(ID_GV, monhoc.getID_giangvien());
+        cv.put(ID_GV, monhoc.getId_giangvien());
         cv.put(TEN_GV, monhoc.getTen_giangvien());
-        cv.put(TKB_MH, monhoc.getTKB_monhoc());
+        cv.put(TKB_MH, monhoc.getTkb_monhoc());
         long insert = db.insert(MONHOC_TABLE, null, cv);
         if(insert == -1) {
             return false;
@@ -181,11 +181,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
         cv.put(TEN_MH, monhoc.getTen_monhoc());
         cv.put(SOLUONG_SV, monhoc.getSoluong_sv());
-        cv.put(ID_GV, monhoc.getID_giangvien());
+        cv.put(ID_GV, monhoc.getId_giangvien());
         cv.put(TEN_GV, monhoc.getTen_giangvien());
-        cv.put(TKB_MH, monhoc.getTKB_monhoc());
+        cv.put(TKB_MH, monhoc.getTkb_monhoc());
 
-        long update = db.update(MONHOC_TABLE, cv, "ID_MH ="+monhoc.getID_monhoc(),null);
+        long update = db.update(MONHOC_TABLE, cv, "ID_MH ="+monhoc.getId_monhoc(),null);
         if(update == -1) {
             return false;
         } else {
@@ -195,7 +195,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean xoaMonHoc (MonHocModel monhoc) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        long delete = db.delete(MONHOC_TABLE, "ID_MH = "+monhoc.getID_monhoc(), null);
+        long delete = db.delete(MONHOC_TABLE, "ID_MH = "+monhoc.getId_monhoc(), null);
         if(delete == -1) {
             return false;
         } else {
@@ -214,12 +214,12 @@ public class DBHelper extends SQLiteOpenHelper {
             //loop through the cursor (result set) and create new monhoc objects
             do {
                 MonHocModel monhoc = new MonHocModel();
-                monhoc.setID_monhoc(cursor.getInt(0));
+                monhoc.setId_monhoc(cursor.getInt(0));
                 monhoc.setTen_monhoc(cursor.getString(1));
                 monhoc.setSoluong_sv(cursor.getInt(2));
-                monhoc.setID_giangvien(cursor.getInt(3));
+                monhoc.setId_giangvien(cursor.getInt(3));
                 monhoc.setTen_giangvien(cursor.getString(4));
-                monhoc.setTKB_monhoc(cursor.getString(5));
+                monhoc.setTkb_monhoc(cursor.getString(5));
                 returnList.add(monhoc);
             } while(cursor.moveToNext());
         }
@@ -501,7 +501,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public ArrayList<BangDiemModel> BangDiem_MH(MonHocModel monhoc){
         ArrayList<BangDiemModel> returnList = new ArrayList<>();
 
-        String queryString = "SELECT * FROM " + BANGDIEM_TABLE + " WHERE " + ID_MH + " = " + monhoc.getID_monhoc();
+        String queryString = "SELECT * FROM " + BANGDIEM_TABLE + " WHERE " + ID_MH + " = " + monhoc.getId_monhoc();
 
         SQLiteDatabase db = this.getReadableDatabase();
 
@@ -575,7 +575,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public ArrayList<SinhVien_MonHoc> DanhSachSV_MonHoc(MonHocModel monhoc){
         ArrayList<SinhVien_MonHoc> returnList = new ArrayList<>();
 
-        String queryString = "SELECT * FROM " + SV_MH_TABLE + " WHERE " + ID_MH + " = " + monhoc.getID_monhoc();
+        String queryString = "SELECT * FROM " + SV_MH_TABLE + " WHERE " + ID_MH + " = " + monhoc.getId_monhoc();
 
         SQLiteDatabase db = this.getReadableDatabase();
 
