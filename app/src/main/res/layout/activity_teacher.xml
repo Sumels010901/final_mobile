@@ -33,7 +33,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtTeacherID"
+        android:id="@+id/editTeacherID"
         android:ems="10"
         android:hint="Mã giảng viên"
         android:inputType="number">
@@ -42,14 +42,14 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtTeacherName"
+        android:id="@+id/editTeacherName"
         android:ems="10"
         android:hint="Tên giảng viên"
         android:inputType="textPersonName"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtTeacherMail"
+        android:id="@+id/editTeacherMail"
         android:ems="10"
         android:hint="Email giảng viên"
         android:inputType="textEmailAddress">
@@ -57,7 +57,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtSoNamGiangDay"
+        android:id="@+id/editSoNamGiangDay"
         android:ems="10"
         android:hint="Số năm giảng dạy"
         android:inputType="number">
@@ -91,5 +91,5 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:id="@+id/lvGV"/>
+        android:id="@+id/lvGv"/>
 </LinearLayout>

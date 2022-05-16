@@ -23,6 +23,13 @@
         android:layout_weight="2"
         android:gravity="center"
         android:text="TextView"
+        android:id="@+id/tvStudentNumber"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:text="TextView"
         android:id="@+id/tvTeacherID"/>
     <TextView
         android:layout_width="0dp"
@@ -31,13 +38,6 @@
         android:gravity="center"
         android:text="TextView"
         android:id="@+id/tvTeacherName"/>
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="2"
-        android:gravity="center"
-        android:text="TextView"
-        android:id="@+id/tvStudentNumber"/>
     <TextView
         android:layout_width="0dp"
         android:layout_height="match_parent"

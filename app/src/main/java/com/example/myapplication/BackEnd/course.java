@@ -13,9 +13,9 @@ import com.example.myapplication.R;
 
 public class course extends AppCompatActivity {
     Button btnCourseBack;
-    String[] ngay = {"thứ 2", "thứ 3","thứ 4","thứ 5","thứ 6","thứ 7"};
-    String[] tiet = {"tiết 1", "tiết 2", "tiết 3", "tiết 4", "tiết 5", "tiết 6"
-            , "tiết 7", "tiết 8", "tiết 9", "tiết 10", "tiết 11"};
+    String[] ngay = {"thu 2", "thu 3","thu 4","thu 5","thu 6","thu 7"};
+    String[] tiet = {"tiet 1", "tiet 2", "tiet 3", "tiet 4", "tiet 5", "tiet 6"
+            , "tiet 7", "tiet 8", "tiet 9", "tiet 10", "tiet 11"};
     Spinner j_spinner; //combobox của thứ
     Spinner i_spinner; //combobox của tiết
     String TKB_MH1 = "";
@@ -32,11 +32,13 @@ public class course extends AppCompatActivity {
                 finish();
             }
         });
-        //------------------------------------Cho combobox Thời khóa biểu-----------------------------------------
         j_spinner = findViewById(R.id.spinnerDay);
+
         i_spinner = findViewById(R.id.spinnerTietHoc);
+
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, ngay);
         ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tiet);
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         j_spinner.setAdapter(adapter);
         j_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -47,6 +49,7 @@ public class course extends AppCompatActivity {
                 TKB_MH = TKB_MH1 + TKB_MH2;
                 //j_spinner_selected.setText(j_spinner.getSelectedItem().toString());
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
                 // TODO Auto-generated method stub
@@ -61,12 +64,11 @@ public class course extends AppCompatActivity {
                 TKB_MH = TKB_MH1 + TKB_MH2;
                 //i_spinner_selected.setText(i_spinner.getSelectedItem().toString());
             }
+
             @Override
             public void onNothingSelected(AdapterView<?> arg0) {
                 // TODO Auto-generated method stub
             }
         });
-        //------------------------------------------------------------------------------------------------
-
     }
 }

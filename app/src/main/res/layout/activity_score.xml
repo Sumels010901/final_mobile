@@ -33,7 +33,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtStudentID"
+        android:id="@+id/editStudentID"
         android:ems="10"
         android:hint="Mã số sinh viên"
         android:inputType="number">
@@ -42,7 +42,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtIDCourse"
+        android:id="@+id/editIDCourse"
         android:ems="10"
         android:hint="Mã môn học"
         android:inputType="number">
@@ -50,7 +50,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtScore"
+        android:id="@+id/editScore"
         android:ems="10"
         android:hint="Điểm"
         android:inputType="number">
@@ -64,20 +64,20 @@
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
-            android:id="@+id/btnAddCourse"
+            android:id="@+id/btnAddScore"
             android:text="Thêm"/>
         <Button
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
-            android:id="@+id/btnDeleteCourse"
+            android:id="@+id/btnDeleteScore"
             android:text="Xóa"/>
         <Button
             android:layout_width="100dp"
             android:layout_height="60dp"
 
             android:layout_margin="10dp"
-            android:id="@+id/btnEditCourse"
+            android:id="@+id/btnEditScore"
             android:text="Sửa"/>
     </LinearLayout>
     <ListView

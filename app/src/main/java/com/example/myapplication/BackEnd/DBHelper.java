@@ -164,9 +164,9 @@ public class DBHelper extends SQLiteOpenHelper {
 
         cv.put(ID_MH, monhoc.getID_monhoc());
         cv.put(TEN_MH, monhoc.getTen_monhoc());
+        cv.put(SOLUONG_SV, monhoc.getSoluong_sv());
         cv.put(ID_GV, monhoc.getID_giangvien());
         cv.put(TEN_GV, monhoc.getTen_giangvien());
-        cv.put(SOLUONG_SV, monhoc.getSoluong_sv());
         cv.put(TKB_MH, monhoc.getTKB_monhoc());
         long insert = db.insert(MONHOC_TABLE, null, cv);
         if(insert == -1) {
@@ -180,9 +180,9 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
 
         cv.put(TEN_MH, monhoc.getTen_monhoc());
+        cv.put(SOLUONG_SV, monhoc.getSoluong_sv());
         cv.put(ID_GV, monhoc.getID_giangvien());
         cv.put(TEN_GV, monhoc.getTen_giangvien());
-        cv.put(SOLUONG_SV, monhoc.getSoluong_sv());
         cv.put(TKB_MH, monhoc.getTKB_monhoc());
 
         long update = db.update(MONHOC_TABLE, cv, "ID_MH ="+monhoc.getID_monhoc(),null);
@@ -213,19 +213,16 @@ public class DBHelper extends SQLiteOpenHelper {
         if(cursor.moveToFirst()){
             //loop through the cursor (result set) and create new monhoc objects
             do {
-                int monhocID = cursor.getInt(0);
-                String monhocName = cursor.getString(1);
-                int soluongSV = cursor.getInt(2);
-                int giangvienID = cursor.getInt(3);
-                String giangvienName = cursor.getString(4);
-                String TKB = cursor.getString(5);
-                MonHocModel newmonhoc = new MonHocModel(monhocID, monhocName, soluongSV, giangvienID, giangvienName, TKB);
-                returnList.add(newmonhoc);
+                MonHocModel monhoc = new MonHocModel();
+                monhoc.setID_monhoc(cursor.getInt(0));
+                monhoc.setTen_monhoc(cursor.getString(1));
+                monhoc.setSoluong_sv(cursor.getInt(2));
+                monhoc.setID_giangvien(cursor.getInt(3));
+                monhoc.setTen_giangvien(cursor.getString(4));
+                monhoc.setTKB_monhoc(cursor.getString(5));
+                returnList.add(monhoc);
             } while(cursor.moveToNext());
-        } else {
-            //failed, do nothing
         }
-        cursor.close();
         db.close();
         return returnList;
     }
@@ -290,40 +287,51 @@ public class DBHelper extends SQLiteOpenHelper {
             return true;
         }
     }
-    public boolean xoaGiangVien (GiangVienModel giangvien) {
+    public boolean xoaGiangVien (int id) {
         SQLiteDatabase db = this.getWritableDatabase();
 
-        long delete = db.delete(GIANGVIEN_TABLE, ID_GV+" = "+giangvien.getID_giangvien(), null);
+        long delete = db.delete(GIANGVIEN_TABLE, ID_GV+" = "+id, null);
         if(delete == -1) {
             return false;
         } else {
             return true;
         }
     }
-    public ArrayList<GiangVienModel> tatcaGiangVien(){
+    public ArrayList<GiangVienModel> getAllGv(){
         ArrayList<GiangVienModel> returnList = new ArrayList<>();
-
-        String queryString = "SELECT * FROM " + GIANGVIEN_TABLE;
-
+        String queryString = "SELECT * FROM " + GIANGVIEN_TABLE+ ";";
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.rawQuery(queryString, null);
         if(cursor.moveToFirst()){
             //loop through the cursor (result set) and create new giangvien objects
             do {
-                int giangvienID = cursor.getInt(0);
-                String giangvienName = cursor.getString(1);
-                String giangvienEmail = cursor.getString(2);
-                int giangvienKN = cursor.getInt(3);
-                GiangVienModel newgiangvien = new GiangVienModel(giangvienID, giangvienName, giangvienEmail, giangvienKN);
+                GiangVienModel newgiangvien = new GiangVienModel();
+                newgiangvien.setID_giangvien(cursor.getInt(0));
+                newgiangvien.setTen_giangvien(cursor.getString(1));
+                newgiangvien.setEmail_giangvien(cursor.getString(2));
+                newgiangvien.setSonam_giangday(cursor.getInt(3));
                 returnList.add(newgiangvien);
             } while(cursor.moveToNext());
-        } else {
-            //failed, do nothing
         }
-        cursor.close();
         db.close();
         return returnList;
+    }
+    public GiangVienModel getGvById(String id) {
+        GiangVienModel giangVien = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + GIANGVIEN_TABLE + " WHERE " + ID_GV +" = '" + id +"'";
+        Cursor cursor = db.rawQuery(query,null);
+        if(!cursor.moveToFirst() ||cursor.getCount() == 0){
+            return null;
+        }
+        else {
+            cursor.moveToFirst();
+            giangVien = new GiangVienModel(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getInt(3));
+        }
+
+        db.close();
+        return giangVien;
     }
 
     // THAO TAC BANG TAI KHOAN
@@ -432,6 +440,31 @@ public class DBHelper extends SQLiteOpenHelper {
         } else {
             return true;
         }
+    }
+    public ArrayList<BangDiemModel> getAllBangDiem(){
+        ArrayList<BangDiemModel> list = new ArrayList<>();
+
+        String queryString = "SELECT * FROM " + BANGDIEM_TABLE;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+        if(cursor.moveToFirst()){
+            //loop through the cursor (result set) and create new sinhvien objects
+            do {
+                BangDiemModel bangDiem = new BangDiemModel();
+                bangDiem.setID_SV(cursor.getInt(0));
+                bangDiem.setID_MH(cursor.getInt(1));
+                bangDiem.setDiem(Float.parseFloat(String.valueOf(cursor.getDouble(2))));
+
+                list.add(bangDiem);
+            } while(cursor.moveToNext());
+        } else {
+            //failed, do nothing
+        }
+        cursor.close();
+        db.close();
+        return list;
     }
     public ArrayList<BangDiemModel> BangDiem_SV(SinhVienModel sinhvien){
         ArrayList<BangDiemModel> returnList = new ArrayList<>();
@@ -555,4 +588,3 @@ public class DBHelper extends SQLiteOpenHelper {
         return returnList;
     }
 }
-
