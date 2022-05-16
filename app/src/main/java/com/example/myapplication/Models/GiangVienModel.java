@@ -20,9 +20,9 @@ public class GiangVienModel {
 
     public GiangVienModel(int ID_giangvien, String ten_giangvien, String ngaysinh_giangvien, int sonam_giangday) {
         this.ID_giangvien = ID_giangvien;
-        Ten_giangvien = ten_giangvien;
-        Email_giangvien = ngaysinh_giangvien;
-        Sonam_giangday = sonam_giangday;
+        this.Ten_giangvien = ten_giangvien;
+        this.Email_giangvien = ngaysinh_giangvien;
+        this.Sonam_giangday = sonam_giangday;
     }
 
     public int getID_giangvien() {

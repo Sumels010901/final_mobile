@@ -300,11 +300,9 @@ public class DBHelper extends SQLiteOpenHelper {
             return true;
         }
     }
-    public ArrayList<GiangVienModel> tatcaGiangVien(){
+    public ArrayList<GiangVienModel> getAllGv(){
         ArrayList<GiangVienModel> returnList = new ArrayList<>();
-
-        String queryString = "SELECT * FROM " + GIANGVIEN_TABLE;
-
+        String queryString = "SELECT * FROM " + GIANGVIEN_TABLE+ ";";
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.rawQuery(queryString, null);
@@ -324,6 +322,22 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return returnList;
+    }
+    public GiangVienModel getGvById(String id) {
+        GiangVienModel giangVien = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + GIANGVIEN_TABLE + " WHERE " + ID_GV +" = '" + id +"'";
+        Cursor cursor = db.rawQuery(query,null);
+        if(!cursor.moveToFirst() ||cursor.getCount() == 0){
+            return null;
+        }
+        else {
+            cursor.moveToFirst();
+            giangVien = new GiangVienModel(cursor.getInt(0),cursor.getString(1),cursor.getString(2),cursor.getInt(3));
+        }
+
+        db.close();
+        return giangVien;
     }
 
     // THAO TAC BANG TAI KHOAN
