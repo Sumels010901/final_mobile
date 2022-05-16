@@ -84,6 +84,8 @@ public class score extends AppCompatActivity {
     }
 
     private void addScore() {
+        int id_SV = Integer.parseInt(editStudentID.getText().toString());
+        int id_MH = Integer.parseInt(editIDCourse.getText().toString());
         if (editStudentID.getText().toString().equals("")) {
             Toast.makeText(this,"Hãy nhập thông tin sinh viên", Toast.LENGTH_SHORT).show();
         }
@@ -93,6 +95,12 @@ public class score extends AppCompatActivity {
         else if (editScore.getText().toString().equals("")) {
             Toast.makeText(this,"Hãy nhập điểm cho sinh viên", Toast.LENGTH_SHORT).show();
         }
+        else if(dbHelper.getSvById(id_SV+"") == null)
+            Toast.makeText(this,"Sinh viên không tồn tại", Toast.LENGTH_SHORT).show();
+
+        else if(!dbHelper.monHocIsExist(id_MH+""))
+            Toast.makeText(this,"Môn học không tồn tại", Toast.LENGTH_SHORT).show();
+
         else {
             if(dbHelper.themBangDiem(getBangDiem())) {
                 Toast.makeText(this,"Thêm gv thành công", Toast.LENGTH_SHORT).show();
@@ -110,12 +118,13 @@ public class score extends AppCompatActivity {
         if (editStudentID.getText().toString().equals("")) {
             Toast.makeText(this,"Chọn sinh viên", Toast.LENGTH_SHORT).show();
         }
-        else if(editIDCourse.getText().toString().equals("")){
+        else if(editIDCourse.getText().toString().equals(""))   {
             Toast.makeText(this,"Hãy nhập thông tin môn học", Toast.LENGTH_SHORT).show();
         }
         else if (editScore.getText().toString().equals("")) {
             Toast.makeText(this,"Hãy nhập điểm cho sinh viên", Toast.LENGTH_SHORT).show();
         }
+
         else {
             if(dbHelper.capNhatBangDiem(getBangDiem())){
                 Toast.makeText(this,"Cập nhật thành công", Toast.LENGTH_SHORT).show();
@@ -163,7 +172,6 @@ public class score extends AppCompatActivity {
         bangdiem.setID_SV(Integer.parseInt(editStudentID.getText().toString()));
         bangdiem.setID_MH(Integer.parseInt(editIDCourse.getText().toString()));
         bangdiem.setDiem(Float.parseFloat(editScore.getText().toString()));
-
         return bangdiem;
     }
 

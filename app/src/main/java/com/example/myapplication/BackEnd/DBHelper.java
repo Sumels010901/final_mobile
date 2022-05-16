@@ -253,7 +253,17 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return returnList;
     }
+    public boolean monHocIsExist(String id) {
+        MonHocModel monHoc = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + MONHOC_TABLE + " WHERE " + ID_MH +" = '" + id +"'";
+        Cursor cursor = db.rawQuery(query,null);
+        if(!cursor.moveToFirst() ||cursor.getCount() == 0){
+            return false;
+        }
+        return true;
 
+    }
     // THAO TAC BANG GIANG VIEN
 
     public boolean themGiangVien (GiangVienModel giangvien) {
