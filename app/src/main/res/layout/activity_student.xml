@@ -20,7 +20,6 @@
         android:layout_height="60dp"
         android:layout_marginLeft="-8dp"
         android:layout_marginTop="-15dp"
-
         >
         <Button
             android:layout_width="wrap_content"
@@ -33,7 +32,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtStudentID"
+        android:id="@+id/editID"
         android:ems="10"
         android:hint="Mã số sinh viên"
         android:inputType="number">
@@ -42,7 +41,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtTen"
+        android:id="@+id/editTen"
         android:ems="10"
         android:hint="Tên sinh viên"
         android:inputType="textPersonName"/>
@@ -78,34 +77,38 @@
 
         <TextView
             android:id="@+id/gioiTinh"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:ems="10"
             android:text="Giới tính: "
+            android:layout_weight="1"
+            android:gravity="center_vertical"
             android:textSize="17dp" />
 
         <RadioGroup
-            android:id="@+id/radioGroup1"
-            android:layout_width="89dp"
+            android:id="@+id/rdgBtnSex"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_span="4"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_weight="2">
 
             <RadioButton
                 android:id="@+id/radNam"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:checked="true"
                 android:text="Nam" />
+            <RadioButton
+                android:id="@+id/radNu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Nữ" />
 
         </RadioGroup>
 
-        <RadioButton
-            android:id="@+id/radNu"
-            android:layout_width="102dp"
-            android:layout_height="wrap_content"
-            android:checked="false"
-            android:text="Nữ" />
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -116,20 +119,20 @@
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
-            android:id="@+id/btnThem"
+            android:id="@+id/btnAdd"
             android:text="Thêm"/>
         <Button
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
-            android:id="@+id/btnXoa"
+            android:id="@+id/btnDelete"
             android:text="Xóa"/>
         <Button
             android:layout_width="100dp"
             android:layout_height="60dp"
 
             android:layout_margin="10dp"
-            android:id="@+id/btnSua"
+            android:id="@+id/btnUpdate"
             android:text="Sửa"/>
     </LinearLayout>
     <ListView

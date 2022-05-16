@@ -72,14 +72,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
     // THAO TAC BANG SINH VIEN
 
-    public boolean themSinhVien (SinhVienModel sinhvien) {
+    public boolean themSinhVien (SinhVienModel sinhVien) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(ID_SV, sinhvien.getID());
-        cv.put(NAME, sinhvien.getName());
-        cv.put(GIOITINH, sinhvien.isSex());
-        cv.put(NGAYSINH, sinhvien.getDob());
+        cv.put(ID_SV, sinhVien.getID());
+        cv.put(NAME, sinhVien.getName());
+        cv.put(GIOITINH, sinhVien.isSex());
+        cv.put(NGAYSINH, sinhVien.getDob());
 
         long insert = db.insert(SINHVIEN_TABLE, null, cv);
         if(insert == -1) {
@@ -96,7 +96,7 @@ public class DBHelper extends SQLiteOpenHelper {
         cv.put(GIOITINH, sinhvien.isSex());
         cv.put(NGAYSINH, sinhvien.getDob());
 
-        long update = db.update(SINHVIEN_TABLE, cv, "ID ="+sinhvien.getID(),null);
+        long update = db.update(SINHVIEN_TABLE, cv, "ID_SV ="+sinhvien.getID(),null);
         if(update == -1) {
             return false;
         } else {
@@ -104,17 +104,17 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
     }
-    public boolean xoaSinhVien(SinhVienModel sinhvien){
+    public boolean xoaSinhVien(int id){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        long delete = db.delete(SINHVIEN_TABLE, "ID = "+sinhvien.getID(), null);
+        long delete = db.delete(SINHVIEN_TABLE, ID_SV +"=?", new String[]{String.valueOf(id)});
         if(delete == -1) {
             return false;
         } else {
             return true;
         }
     }
-    public ArrayList<SinhVienModel> tatcaSinhVien(){
+    public ArrayList<SinhVienModel> getAllSv(){
         ArrayList<SinhVienModel> returnList = new ArrayList<>();
 
         String queryString = "SELECT * FROM " + SINHVIEN_TABLE;
@@ -138,6 +138,22 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return returnList;
+    }
+    public SinhVienModel getSvById(String id) {
+        SinhVienModel sinhVien = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + SINHVIEN_TABLE + " WHERE " + ID_SV +" = '" + id +"'";
+        Cursor cursor = db.rawQuery(query,null);
+        if(!cursor.moveToFirst() ||cursor.getCount() == 0){
+            return null;
+        }
+        else {
+            cursor.moveToFirst();
+            sinhVien = new SinhVienModel(cursor.getInt(0),cursor.getString(1),cursor.getInt(2) > 0,cursor.getString(3));
+        }
+
+        db.close();
+        return sinhVien;
     }
 
     // THAO TAC BANG MON HOC
