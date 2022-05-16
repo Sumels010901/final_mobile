@@ -9,11 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
-
-import com.example.myapplication.Adapter.GiangVienAdapter;
 import com.example.myapplication.Adapter.ScoreAdapter;
 import com.example.myapplication.Models.BangDiemModel;
-import com.example.myapplication.Models.GiangVienModel;
 import com.example.myapplication.R;
 
 import java.util.ArrayList;
@@ -49,16 +46,18 @@ public class score extends AppCompatActivity {
         editStudentID = findViewById(R.id.editStudentID);
         editIDCourse = findViewById(R.id.editIDCourse);
         editScore = findViewById(R.id.editScore);
-        btnAddScore = findViewById(R.id.btnAddTeacher);
-        btnEditScore = findViewById(R.id.btnEditTeacher);
+        btnAddScore = findViewById(R.id.btnAddScore);
+        btnEditScore = findViewById(R.id.btnEditScore);
         btnEditScore.setEnabled(false);
-        btnDeleteScore = findViewById(R.id.btnDeleteTeacher);
+        btnDeleteScore = findViewById(R.id.btnDeleteScore);
         btnDeleteScore.setEnabled(false);
         lvScore = findViewById(R.id.lvScore);
         dbHelper = new DBHelper(this);
         listBangDiem = dbHelper.getAllBangDiem();
         adapter = new ScoreAdapter(this,R.layout.score_item_lv,listBangDiem);
         lvScore.setAdapter(adapter);
+
+        btnScoreBack = findViewById(R.id.btnScoreBack);
     }
     public void createEvent(){
         btnAddScore.setOnClickListener(this::onClick);
@@ -108,17 +107,54 @@ public class score extends AppCompatActivity {
         }
     }
     private void updateScore() {
+        if (editStudentID.getText().toString().equals("")) {
+            Toast.makeText(this,"Chọn sinh viên", Toast.LENGTH_SHORT).show();
+        }
+        else if(editIDCourse.getText().toString().equals("")){
+            Toast.makeText(this,"Hãy nhập thông tin môn học", Toast.LENGTH_SHORT).show();
+        }
+        else if (editScore.getText().toString().equals("")) {
+            Toast.makeText(this,"Hãy nhập điểm cho sinh viên", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            if(dbHelper.capNhatBangDiem(getBangDiem())){
+                Toast.makeText(this,"Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                resetForm();
+                listBangDiem.clear();
+                listBangDiem.addAll(dbHelper.getAllBangDiem());
+                adapter.notifyDataSetChanged();
+            }
+            else {
+                Toast.makeText(this,"Cập nhật thất bại", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
     private void deleteScore() {
+        if(editIDCourse.getText().toString().equals("")){
+            Toast.makeText(this, "Vui lòng chọn điểm muốn xóa", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            if (dbHelper.xoaBangDiem(Integer.parseInt(editStudentID.getText().toString()),
+                    Integer.parseInt(editIDCourse.getText().toString()))) {
+                Toast.makeText(this,"Xóa thành công", Toast.LENGTH_SHORT).show();
+                resetForm();
+                listBangDiem.clear();
+                listBangDiem.addAll(dbHelper.getAllBangDiem());
+                adapter.notifyDataSetChanged();
+            }
+        }
     }
     private void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         BangDiemModel bangDiem = listBangDiem.get(i);
+        editStudentID.setText(String.valueOf(bangDiem.getID_SV()));
         editIDCourse.setText(String.valueOf(bangDiem.getID_MH()));
         editScore.setText(String.valueOf(bangDiem.getDiem()));
         btnEditScore.setEnabled(true);
         btnDeleteScore.setEnabled(true);
         editStudentID.setFocusable(false);
         editStudentID.setEnabled(false);
+        editIDCourse.setFocusable(false);
+        editIDCourse.setEnabled(false);
         btnAddScore.setText("Hủy");
     }
 
@@ -141,6 +177,9 @@ public class score extends AppCompatActivity {
         editStudentID.setEnabled(true);
         editStudentID.setFocusable(true);
         editStudentID.setFocusableInTouchMode(true);
+        editIDCourse.setEnabled(true);
+        editIDCourse.setFocusable(true);
+        editIDCourse.setFocusableInTouchMode(true);
         editStudentID.requestFocus();
     }
 }

@@ -419,11 +419,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean capNhatBangDiem(BangDiemModel bangdiem){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-
-        cv.put(ID_MH, bangdiem.getID_MH());
         cv.put(DIEM, bangdiem.getDiem());
 
-        long update = db.update(BANGDIEM_TABLE, cv, ID_SV+" = "+bangdiem.getID_SV(),null);
+        long update = db.update(BANGDIEM_TABLE, cv, ID_SV+" = "+bangdiem.getID_SV()  +" and " + ID_MH + " = " +bangdiem.getID_MH(),null);
         if(update == -1) {
             return false;
         } else {
@@ -431,10 +429,10 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
     }
-    public boolean xoaBangDiem(BangDiemModel bangdiem){
+    public boolean xoaBangDiem(int idSv, int idMonHoc){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        long delete = db.delete(BANGDIEM_TABLE, ID_SV+" = "+bangdiem.getID_SV(), null);
+        long delete = db.delete(BANGDIEM_TABLE, ID_SV+" = "+idSv +" and " + ID_MH + " = " +idMonHoc, null);
         if(delete == -1) {
             return false;
         } else {
