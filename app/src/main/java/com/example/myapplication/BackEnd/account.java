@@ -31,6 +31,7 @@ public class account extends AppCompatActivity {
     String[] acc = {"Giáo viên","Học sinh"};
     Spinner j_spinner; //combobox của thứ
     String accountType = "";
+    private int type = 0;
 
 
     @Override
@@ -104,10 +105,10 @@ public class account extends AppCompatActivity {
 
     private void addAccount() {
         if (txtUsername.getText().toString().equals("")) {
-            Toast.makeText(this,"Hãy nhập mã giảng viên", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Hãy nhập mã sinh viên", Toast.LENGTH_SHORT).show();
         }
         else if(txtPass.getText().toString().equals("")){
-            Toast.makeText(this,"Hãy nhập tên giảng viên", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,"Hãy nhập password", Toast.LENGTH_SHORT).show();
         }/*
         else if (dbHelper.getTaiKhoan(txtUsername.getText().toString())!=null){
             Toast.makeText(this,"Mã số này đã được sử dụng", Toast.LENGTH_SHORT).show();
@@ -127,10 +128,14 @@ public class account extends AppCompatActivity {
     }
 
     private TaiKhoanModel getTKInfo() {
+        String acctype = spinnerAccType.getSelectedItem().toString();
+        if(acctype.equals("Giáo viên")){
+            type = 2;
+        } else {type=1;}
         TaiKhoanModel taikhoan = new TaiKhoanModel();
         taikhoan.setSvID(Integer.parseInt(txtUsername.getText().toString()));
         taikhoan.setPassword(txtPass.getText().toString());
-        taikhoan.setAccType(Integer.parseInt("1"));
+        taikhoan.setAccType(type);
         return taikhoan;
     }
 

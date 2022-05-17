@@ -21,6 +21,7 @@ public class home extends AppCompatActivity {
         btnMngTeacher = findViewById(R.id.btnToTeacher);
         btnMngAccount = findViewById(R.id.btnToAccount);
         btnBack = findViewById(R.id.btnback);
+
         btnMngAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
