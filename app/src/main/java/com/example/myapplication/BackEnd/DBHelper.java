@@ -24,6 +24,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String GIOITINH = "SEX";
     public static final String NGAYSINH = "DOB";
     public static final String TAIKHOAN_TABLE = "TAIKHOAN_TABLE";
+    public static final String USERNAME = "USERNAME";
     public static final String PASSWORD = "PASSWORD";
     public static final String LOAI_TAIKHOAN = "ACC_TYPE";
     public static final String MONHOC_TABLE = "MONHOC_TABLE";
@@ -49,7 +50,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String createTableSinhVienStatement = "CREATE TABLE " + SINHVIEN_TABLE + " (" + ID_SV + " INTEGER PRIMARY KEY, " + NAME + " TEXT, " + GIOITINH + " BOOL, " + NGAYSINH + " DATE)";
         db.execSQL(createTableSinhVienStatement);
 
-        String createTableTaiKhoanStatement ="CREATE TABLE " + TAIKHOAN_TABLE + " (" + ID_SV + " INTEGER PRIMARY KEY, " + PASSWORD + " TEXT, " + LOAI_TAIKHOAN + " INTEGER)";
+        String createTableTaiKhoanStatement ="CREATE TABLE " + TAIKHOAN_TABLE + " (" + USERNAME + " INTEGER PRIMARY KEY, " + PASSWORD + " TEXT, " + LOAI_TAIKHOAN + " INTEGER)";
         db.execSQL(createTableTaiKhoanStatement);
 
         String createTableMonHocStatement ="CREATE TABLE " + MONHOC_TABLE + " (" + ID_MH + " INTEGER PRIMARY KEY, " + TEN_MH + " TEXT, " + ID_GV + " INTEGER, " + TEN_GV + " TEXT, " + SOLUONG_SV + " INT, " + TKB_MH + " DATETIME)";
@@ -407,6 +408,23 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return returnList;
+    }
+
+    public TaiKhoanModel getTaiKhoan(String id){
+        TaiKhoanModel taikhoan = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + TAIKHOAN_TABLE + " WHERE " + USERNAME +" = '" + id +"'";
+        Cursor cursor = db.rawQuery(query,null);
+        if(!cursor.moveToFirst() ||cursor.getCount() == 0){
+            return null;
+        }
+        else {
+            cursor.moveToFirst();
+            taikhoan = new TaiKhoanModel(cursor.getInt(0),cursor.getString(1),cursor.getInt(2));
+        }
+
+        db.close();
+        return taikhoan;
     }
 
     // THAO TAC BANG DIEM
