@@ -53,9 +53,9 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtsvID"
+        android:id="@+id/txtUserName"
         android:ems="10"
-        android:hint="Mã sinh viên"
+        android:hint="Tên đăng nhập"
         android:inputType="number">
         <requestFocus/>
     </EditText>

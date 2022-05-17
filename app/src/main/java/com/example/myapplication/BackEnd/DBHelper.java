@@ -351,9 +351,9 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
-        cv.put(ID_SV, taikhoan.getSvID());
+        cv.put(USERNAME, taikhoan.getSvID());
         cv.put(PASSWORD, taikhoan.getPassword());
-
+        cv.put(LOAI_TAIKHOAN, taikhoan.getAccType());
         long insert = db.insert(TAIKHOAN_TABLE, null, cv);
         if(insert == -1) {
             return false;
@@ -366,8 +366,9 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
 
         cv.put(PASSWORD, taikhoan.getPassword());
+        cv.put(LOAI_TAIKHOAN, taikhoan.getAccType());
 
-        long update = db.update(TAIKHOAN_TABLE, cv, ID_SV+" = "+taikhoan.getSvID(),null);
+        long update = db.update(TAIKHOAN_TABLE, cv, USERNAME+" = "+taikhoan.getSvID(),null);
         if(update == -1) {
             return false;
         } else {
@@ -375,10 +376,10 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 
     }
-    public boolean xoaTaiKhoan(TaiKhoanModel taikhoan){
+    public boolean xoaTaiKhoan(String id){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        long delete = db.delete(TAIKHOAN_TABLE, ID_SV+" = "+taikhoan.getSvID(), null);
+        long delete = db.delete(TAIKHOAN_TABLE, USERNAME+" = "+id, null);
         if(delete == -1) {
             return false;
         } else {

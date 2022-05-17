@@ -36,30 +36,32 @@ public class MainActivity extends AppCompatActivity {
                 String password = edtPassword.getText().toString();
                 String username = edtUsername.getText().toString();
 
-                TaiKhoanModel account = dbHelper.getTaiKhoan(username);
-                int loai_tk = account.getAccType();
+                //TaiKhoanModel account = dbHelper.getTaiKhoan(username);
+                //int loai_tk = account.getAccType();
 
                 if(username.equals("admin") && password.equals("admin")) {
                     Toast.makeText(MainActivity.this, "Admin login success!", Toast.LENGTH_SHORT).show();
                     Intent toHome = new Intent(MainActivity.this, home.class);
                     startActivity(toHome);
-                } else if (loai_tk == 1) { // Sinh Vien
+                } /*else if (loai_tk == 1) { // Sinh Vien
                     if (password.equals(account.getPassword())){
                         Toast.makeText(MainActivity.this, "Student login success!", Toast.LENGTH_SHORT).show();
                         Intent toSVHome = new Intent(MainActivity.this, sinhvien_home.class);
                         toSVHome.putExtra("SV_ID", username);
                         startActivity(toSVHome);
-                    } else
-                    Toast.makeText(MainActivity.this, "Login failed!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(MainActivity.this, "Login failed!", Toast.LENGTH_SHORT).show();
+                    }
                 } else if (loai_tk == 2) { //Giang Vien
                     if (password.equals(account.getPassword())){
                         Toast.makeText(MainActivity.this, "Teacher login success!", Toast.LENGTH_SHORT).show();
                         Intent toGVHome = new Intent(MainActivity.this, sinhvien_home.class);
                         toGVHome.putExtra("GV_ID", username);
                         startActivity(toGVHome);
-                    } else
+                    } else {
                         Toast.makeText(MainActivity.this, "Login failed!", Toast.LENGTH_SHORT).show();
-                } else {
+                    }
+                } */else {
                     Toast.makeText(MainActivity.this, "Login failed!", Toast.LENGTH_SHORT).show();
                 }
             }

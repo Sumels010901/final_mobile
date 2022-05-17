@@ -13,6 +13,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.myapplication.Adapter.AdapterCourse;
+import com.example.myapplication.Adapter.TaiKhoanAdapter;
 import com.example.myapplication.Models.GiangVienModel;
 import com.example.myapplication.R;
 import com.example.myapplication.Models.TaiKhoanModel;
@@ -20,12 +21,12 @@ import com.example.myapplication.Models.TaiKhoanModel;
 import java.util.ArrayList;
 
 public class account extends AppCompatActivity {
-    private EditText txtIDStudent, txtPass;
+    private EditText txtUsername, txtPass;
     private Spinner spinnerAccType;
+    private TaiKhoanAdapter adapterTK;
     private Button btnAddAccount,btnDeleteAccount,btnEditAccount,btnCourseBack;
     private ListView lvAccount;
     private DBHelper dbHelper;
-    //private Ada adapterAccount;
     private ArrayList<TaiKhoanModel> listAccount;
     String[] acc = {"Giáo viên","Học sinh"};
     Spinner j_spinner; //combobox của thứ
@@ -37,7 +38,8 @@ public class account extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account);
         init();
-        //createEvent();
+        createEvent();
+
         btnCourseBack = findViewById(R.id.btnCourseBack);
         btnCourseBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,8 +62,9 @@ public class account extends AppCompatActivity {
         });
     }
     public void init(){
-        txtIDStudent = findViewById(R.id.txtsvID);
+        txtUsername = findViewById(R.id.txtUserName);
         txtPass = findViewById(R.id.txtPassword);
+
         btnAddAccount = findViewById(R.id.btnAddAccount);
         btnEditAccount = findViewById(R.id.btnEditAccount);
         btnDeleteAccount = findViewById(R.id.btnDeleteAccount);
@@ -72,9 +75,120 @@ public class account extends AppCompatActivity {
         lvAccount = findViewById(R.id.lvAccount);
         dbHelper = new DBHelper(this);
         listAccount = dbHelper.tatcaTaiKhoan();
-        //adapterCourse = new AdapterCourse(this,R.layout.course_item_lv,listMonHoc);
-        //lvCourse.setAdapter(adapterCourse);
+        adapterTK = new TaiKhoanAdapter(this,R.layout.taikhoan_item_lv, listAccount);
+        lvAccount.setAdapter(adapterTK);
+    }
+    public void createEvent(){
+        btnAddAccount.setOnClickListener(this::onClick);
+        btnEditAccount.setOnClickListener(this::onClick);
+        btnDeleteAccount.setOnClickListener(this::onClick);
+        lvAccount.setOnItemClickListener(this::onItemClick);
     }
 
+    private void onClick(View v) {
+        switch (v.getId()){
+            case R.id.btnAddAccount:
+                if (btnAddAccount.getText().toString().equalsIgnoreCase("Thêm"))
+                    addAccount();
+                else
+                    resetForm();
+                break;
+            case R.id.btnEditAccount:
+                updateAccount();
+                break;
+            case R.id.btnDeleteAccount:
+                deleteAccount();
+                break;
+        }
+    }
+
+    private void addAccount() {
+        if (txtUsername.getText().toString().equals("")) {
+            Toast.makeText(this,"Hãy nhập mã giảng viên", Toast.LENGTH_SHORT).show();
+        }
+        else if(txtPass.getText().toString().equals("")){
+            Toast.makeText(this,"Hãy nhập tên giảng viên", Toast.LENGTH_SHORT).show();
+        }/*
+        else if (dbHelper.getTaiKhoan(txtUsername.getText().toString())!=null){
+            Toast.makeText(this,"Mã số này đã được sử dụng", Toast.LENGTH_SHORT).show();
+        }*/
+        else {
+            if(dbHelper.themTaiKhoan(getTKInfo())) {
+                Toast.makeText(this,"Thêm tài khoản thành công", Toast.LENGTH_SHORT).show();
+                resetForm();
+                listAccount.clear();
+                listAccount.addAll(dbHelper.tatcaTaiKhoan());
+                adapterTK.notifyDataSetChanged();
+            }
+            else {
+                Toast.makeText(this,"Thêm tài khoản thất bại", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private TaiKhoanModel getTKInfo() {
+        TaiKhoanModel taikhoan = new TaiKhoanModel();
+        taikhoan.setSvID(Integer.parseInt(txtUsername.getText().toString()));
+        taikhoan.setPassword(txtPass.getText().toString());
+        taikhoan.setAccType(Integer.parseInt("1"));
+        return taikhoan;
+    }
+
+    private void updateAccount() {
+        if (txtUsername.getText().toString().equals("")) {
+            Toast.makeText(this,"Hãy nhập mã giảng viên", Toast.LENGTH_SHORT).show();
+        }
+        else if(txtPass.getText().toString().equals("")){
+            Toast.makeText(this,"Hãy nhập tên giảng viên", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            if(dbHelper.capNhatTaiKhoan((getTKInfo()))){
+                Toast.makeText(this,"Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                resetForm();
+                listAccount.clear();
+                listAccount.addAll(dbHelper.tatcaTaiKhoan());
+                adapterTK.notifyDataSetChanged();
+            }
+            else {
+                Toast.makeText(this,"Cập nhật thất bại", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    private void deleteAccount() {
+        if(txtUsername.getText().toString().equals("")){
+            Toast.makeText(this, "Hãy chọn tài khoản", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            if (dbHelper.xoaTaiKhoan(txtUsername.getText().toString())) {
+                Toast.makeText(this,"Xóa thành công", Toast.LENGTH_SHORT).show();
+                resetForm();
+                listAccount.clear();
+                listAccount.addAll(dbHelper.tatcaTaiKhoan());
+                adapterTK.notifyDataSetChanged();
+            }
+        }
+    }
+    private void resetForm() {
+        txtUsername.setText("");
+        txtPass.setText("");
+        btnAddAccount.setText("Thêm");
+        btnEditAccount.setEnabled(false);
+        btnDeleteAccount.setEnabled(false);
+        txtUsername.setEnabled(true);
+        txtUsername.setFocusable(true);
+        txtUsername.setFocusableInTouchMode(true);
+        txtUsername.requestFocus();
+    }
+
+    private void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        TaiKhoanModel taikhoan = listAccount.get(i);
+        txtUsername.setText(String.valueOf(taikhoan.getSvID()));
+        txtPass.setText(taikhoan.getPassword());
+        btnEditAccount.setEnabled(true);
+        btnDeleteAccount.setEnabled(true);
+        txtUsername.setFocusable(false);
+        txtUsername.setEnabled(false);
+        btnAddAccount.setText("Hủy");
+    }
 
 }
