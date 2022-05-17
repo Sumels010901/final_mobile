@@ -81,7 +81,7 @@ public class student extends AppCompatActivity {
         int day = cal.get(Calendar.DAY_OF_MONTH);
         return makeDateString(day, month, year);
     }
-    //Khởi tạo khung chọn ngày
+    //Khởi tạo khung chọn ngày, lấy giá trị ngày tháng năm đã chọn 
     private void initDatePicker()
     {
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener()
