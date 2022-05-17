@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".BackEnd.course">
+    tools:context=".BackEnd.account">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -30,53 +30,6 @@
             android:text="Quay lại"/>
 
     </LinearLayout>
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtIDCourse"
-        android:ems="10"
-        android:hint="Mã môn học"
-        android:inputType="number">
-        <requestFocus/>
-    </EditText>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtCourseName"
-        android:ems="10"
-        android:hint="Tên môn học"
-        android:inputType="textPersonName">
-    </EditText>
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtSL_SV"
-        android:ems="10"
-        android:hint="Số lượng sinh viên"
-        android:inputType="number">
-    </EditText>
-
-    <EditText
-        android:id="@+id/txtTeacherIDCourse"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Mã giảng viên"
-        android:inputType="number">
-    </EditText>
-
-    <EditText
-        android:id="@+id/txtTeacherNameCourse"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="Tên giảng viên"
-        android:inputType="textPersonName">
-    </EditText>
-
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
@@ -89,30 +42,34 @@
             android:layout_width="50dp"
             android:layout_height="match_parent"
             android:ems="10"
-            android:text="Thứ:"
-            android:textSize="17dp" />
-
+            android:text="Loaị tài khoản"
+            android:textSize="20dp" />
         <Spinner
-            android:id="@+id/spinnerDay"
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-        <TextView
-            android:id="@+id/TietHoc"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:ems="10"
-            android:text="Tiết học:"
-            android:textSize="17dp" />
-
-        <Spinner
-            android:id="@+id/spinnerTietHoc"
-
+            android:id="@+id/spinnerAccountType"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             />
     </LinearLayout>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtsvID"
+        android:ems="10"
+        android:hint="Mã sinh viên"
+        android:inputType="number">
+        <requestFocus/>
+    </EditText>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtPassword"
+        android:ems="10"
+        android:hint="Mật khẩu"
+        android:inputType="textPassword">
+    </EditText>
+
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -120,7 +77,7 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/btnAddCourse"
+            android:id="@+id/btnAddAccount"
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
@@ -130,19 +87,19 @@
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:layout_margin="10dp"
-            android:id="@+id/btnDeleteCourse"
+            android:id="@+id/btnDeleteAccount"
             android:text="Xóa"/>
         <Button
             android:layout_width="100dp"
             android:layout_height="60dp"
 
             android:layout_margin="10dp"
-            android:id="@+id/btnEditCourse"
+            android:id="@+id/btnEditAccount"
             android:text="Sửa"/>
     </LinearLayout>
     <ListView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:id="@+id/lvCourse"/>
+        android:id="@+id/lvAccount"/>
 </LinearLayout>
