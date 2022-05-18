@@ -630,4 +630,28 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return returnList;
     }
+    public ArrayList<SinhVien_MonHoc> getAllEnroll(){
+        ArrayList<SinhVien_MonHoc> list = new ArrayList<>();
+
+        String queryString = "SELECT * FROM " + SV_MH_TABLE;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+        if(cursor.moveToFirst()){
+            //loop through the cursor (result set) and create new sinhvien objects
+            do {
+                SinhVien_MonHoc svmh = new SinhVien_MonHoc();
+                svmh.setID_SV(cursor.getInt(0));
+                svmh.setID_MH(cursor.getInt(1));
+
+                list.add(svmh);
+            } while(cursor.moveToNext());
+        } else {
+            //failed, do nothing
+        }
+        cursor.close();
+        db.close();
+        return list;
+    }
 }

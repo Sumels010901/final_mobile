@@ -3,6 +3,7 @@ package com.example.myapplication.BackEnd;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
@@ -26,10 +27,17 @@ public class sinhvien_viewCourse extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sinhvien_view_course);
         btnBack = findViewById(R.id.btnCourseSVBack);
+        btnBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         String SV_ID = getIntent().getStringExtra("SV_ID");
         lvCourse = findViewById(R.id.lvCourse);
         dbHelper = new DBHelper(this);
         listMonHocID = dbHelper.CacMonHoc_SinhVien(SV_ID);
+        listMonHoc = new ArrayList<MonHocModel>();
         for (SinhVien_MonHoc sv_mh:listMonHocID){
             MonHocModel monhoc = new MonHocModel();
             monhoc = dbHelper.getMHById(Integer.toString(sv_mh.getID_MH()));
@@ -37,5 +45,6 @@ public class sinhvien_viewCourse extends AppCompatActivity {
         }
         adapterCourse = new AdapterCourse(this,R.layout.course_item_lv,listMonHoc);
         lvCourse.setAdapter(adapterCourse);
+
     }
 }

@@ -10,7 +10,7 @@ import android.widget.Button;
 import com.example.myapplication.R;
 
 public class home extends AppCompatActivity {
-    Button btnMngStudent, btnMngScore, btnMngCourse, btnMngTeacher, btnMngAccount, btnBack;
+    Button btnMngStudent, btnMngScore, btnMngCourse, btnMngTeacher, btnMngAccount, btnMngEnroll, btnBack;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,8 +20,15 @@ public class home extends AppCompatActivity {
         btnMngScore = findViewById(R.id.btnToScore);
         btnMngTeacher = findViewById(R.id.btnToTeacher);
         btnMngAccount = findViewById(R.id.btnToAccount);
+        btnMngEnroll = findViewById(R.id.btnToEnroll);
         btnBack = findViewById(R.id.btnback);
-
+        btnMngEnroll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toEnrollView = new Intent(home.this, enroll.class);
+                startActivity(toEnrollView);
+            }
+        });
         btnMngAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
