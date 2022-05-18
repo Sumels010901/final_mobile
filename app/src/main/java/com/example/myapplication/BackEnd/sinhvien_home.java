@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.myapplication.Models.GiangVienModel;
 import com.example.myapplication.Models.SinhVienModel;
+import com.example.myapplication.Models.TaiKhoanModel;
 import com.example.myapplication.R;
 
 public class sinhvien_home extends AppCompatActivity {
@@ -19,8 +20,8 @@ public class sinhvien_home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sinhvien_home);
-        String SV_ID = getIntent().getStringExtra("SV_ID");
-
+        String ID = getIntent().getStringExtra("SV_ID");
+        System.out.println(ID);
         btnBack = findViewById(R.id.btnSVback);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -32,9 +33,14 @@ public class sinhvien_home extends AppCompatActivity {
         btnViewInfo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent toInfoView = new Intent(sinhvien_home.this, sinhvien_viewInfo.class);
-                toInfoView.putExtra("SV_ID", SV_ID);
-                startActivity(toInfoView);
+                try {
+                    Intent toInfoView = new Intent(sinhvien_home.this, sinhvien_viewInfo.class);
+                    toInfoView.putExtra("SV_ID", ID);
+                    startActivity(toInfoView);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
         });
         btnViewCourse = findViewById(R.id.btnViewStudentCourse);
@@ -42,6 +48,7 @@ public class sinhvien_home extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent toCourseView = new Intent(sinhvien_home.this, sinhvien_viewCourse.class);
+                toCourseView.putExtra("SV_ID", ID);
                 startActivity(toCourseView);
             }
         });

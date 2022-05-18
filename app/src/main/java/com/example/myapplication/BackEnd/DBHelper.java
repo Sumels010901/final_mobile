@@ -265,6 +265,22 @@ public class DBHelper extends SQLiteOpenHelper {
         return true;
 
     }
+    public MonHocModel getMHById(String id) {
+        MonHocModel monhoc = null;
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + MONHOC_TABLE + " WHERE " + ID_MH +" = '" + id +"'";
+        Cursor cursor = db.rawQuery(query,null);
+        if(!cursor.moveToFirst() ||cursor.getCount() == 0){
+            return null;
+        }
+        else {
+            cursor.moveToFirst();
+            monhoc = new MonHocModel(cursor.getInt(0),cursor.getString(1),cursor.getInt(2),cursor.getInt(3),cursor.getString(4), cursor.getString(5));
+        }
+
+        db.close();
+        return monhoc;
+    }
     // THAO TAC BANG GIANG VIEN
 
     public boolean themGiangVien (GiangVienModel giangvien) {
@@ -349,12 +365,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public boolean themTaiKhoan (TaiKhoanModel taikhoan) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
+        ContentValues tkcv = new ContentValues();
 
-        cv.put(USERNAME, taikhoan.getSvID());
-        cv.put(PASSWORD, taikhoan.getPassword());
-        cv.put(LOAI_TAIKHOAN, taikhoan.getAccType());
-        long insert = db.insert(TAIKHOAN_TABLE, null, cv);
+        tkcv.put(USERNAME, taikhoan.getSvID());
+        tkcv.put(PASSWORD, taikhoan.getPassword());
+        tkcv.put(LOAI_TAIKHOAN, taikhoan.getAccType());
+        long insert = db.insert(TAIKHOAN_TABLE, null, tkcv);
         if(insert == -1) {
             return false;
         } else {
@@ -568,10 +584,10 @@ public class DBHelper extends SQLiteOpenHelper {
             return true;
         }
     }
-    public ArrayList<SinhVien_MonHoc> CacMonHoc_SinhVien(SinhVienModel sinhvien){
+    public ArrayList<SinhVien_MonHoc> CacMonHoc_SinhVien(String id){
         ArrayList<SinhVien_MonHoc> returnList = new ArrayList<>();
 
-        String queryString = "SELECT * FROM " + SV_MH_TABLE + " WHERE " + ID_SV + " = " + sinhvien.getID();
+        String queryString = "SELECT * FROM " + SV_MH_TABLE + " WHERE " + ID_SV + " = " + id;
 
         SQLiteDatabase db = this.getReadableDatabase();
 

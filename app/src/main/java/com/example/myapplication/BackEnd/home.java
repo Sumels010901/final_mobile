@@ -25,7 +25,7 @@ public class home extends AppCompatActivity {
         btnMngAccount.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent toAccountView = new Intent(home.this, account.class);
+                Intent toAccountView = new Intent(home.this, taikhoan.class);
                 startActivity(toAccountView);
             }
         });

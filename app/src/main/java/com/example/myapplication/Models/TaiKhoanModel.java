@@ -21,6 +21,15 @@ public class TaiKhoanModel {
         this.accType = accType;
     }
 
+    @Override
+    public String toString() {
+        return "TaiKhoanModel{" +
+                "svID=" + svID +
+                ", password='" + password + '\'' +
+                ", accType=" + accType +
+                '}';
+    }
+
     public int getSvID() {
         return svID;
     }

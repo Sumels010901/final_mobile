@@ -37,7 +37,7 @@ public class TaiKhoanAdapter extends ArrayAdapter<TaiKhoanModel> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         TaiKhoanAdapter.ViewHolder viewHolder;
         if(convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.gv_item_lv,parent,false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.taikhoan_item_lv,parent,false);
             viewHolder = new ViewHolder();
             viewHolder.tvUsername = convertView.findViewById(R.id.tvUsername);
             viewHolder.tvPassword = convertView.findViewById(R.id.tvPassword);

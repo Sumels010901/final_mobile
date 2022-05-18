@@ -13,12 +13,12 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.myapplication.Adapter.TaiKhoanAdapter;
-import com.example.myapplication.R;
 import com.example.myapplication.Models.TaiKhoanModel;
+import com.example.myapplication.R;
 
 import java.util.ArrayList;
 
-public class account extends AppCompatActivity {
+public class taikhoan extends AppCompatActivity {
     private EditText txtUsername, txtPass;
     private Spinner spinnerAccType;
     private TaiKhoanAdapter adapterTK;
@@ -30,12 +30,10 @@ public class account extends AppCompatActivity {
     Spinner j_spinner; //combobox của thứ
     String accountType = "";
     private int type = 0;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account);
+        setContentView(R.layout.activity_taikhoan);
         init();
         createEvent();
 
@@ -73,7 +71,7 @@ public class account extends AppCompatActivity {
         btnDeleteAccount.setEnabled(false);
 
         lvAccount = findViewById(R.id.lvAccount);
-        dbHelper = new DBHelper(account.this);
+        dbHelper = new DBHelper(taikhoan.this);
         listAccount = dbHelper.tatcaTaiKhoan();
         adapterTK = new TaiKhoanAdapter(this,R.layout.taikhoan_item_lv, listAccount);
         lvAccount.setAdapter(adapterTK);
@@ -195,5 +193,4 @@ public class account extends AppCompatActivity {
         txtUsername.setEnabled(false);
         btnAddAccount.setText("Hủy");
     }
-
 }
