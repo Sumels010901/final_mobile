@@ -240,9 +240,9 @@ public class DBHelper extends SQLiteOpenHelper {
             do {
                 int monhocID = cursor.getInt(0);
                 String monhocName = cursor.getString(1);
-                int soluongSV = cursor.getInt(2);
-                int giangvienID = cursor.getInt(3);
-                String giangvienName = cursor.getString(4);
+                int soluongSV = cursor.getInt(4);
+                int giangvienID = cursor.getInt(2);
+                String giangvienName = cursor.getString(3);
                 String TKB = cursor.getString(5);
                 MonHocModel newmonhoc = new MonHocModel(monhocID, monhocName, soluongSV, giangvienID, giangvienName, TKB);
                 returnList.add(newmonhoc);
@@ -257,7 +257,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean monHocIsExist(String id) {
         MonHocModel monHoc = null;
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + MONHOC_TABLE + " WHERE " + ID_MH +" = '" + id +"'";
+        String query = "SELECT * FROM " + MONHOC_TABLE + " WHERE " + ID_MH + " = " + id;
         Cursor cursor = db.rawQuery(query,null);
         if(!cursor.moveToFirst() ||cursor.getCount() == 0){
             return false;
@@ -266,20 +266,30 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
     public MonHocModel getMHById(String id) {
-        MonHocModel monhoc = null;
-        SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + MONHOC_TABLE + " WHERE " + ID_MH +" = '" + id +"'";
-        Cursor cursor = db.rawQuery(query,null);
-        if(!cursor.moveToFirst() ||cursor.getCount() == 0){
-            return null;
-        }
-        else {
-            cursor.moveToFirst();
-            monhoc = new MonHocModel(cursor.getInt(0),cursor.getString(1),cursor.getInt(2),cursor.getInt(3),cursor.getString(4), cursor.getString(5));
-        }
 
-        db.close();
-        return monhoc;
+        String queryString = "SELECT * FROM " + MONHOC_TABLE + " WHERE " + ID_MH + " = " + id;
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.rawQuery(queryString, null);
+
+        MonHocModel newmonhoc = new MonHocModel();
+        if(cursor.moveToFirst()){
+            //loop through the cursor (result set) and create new monhoc objects
+            do {
+                int monhocID = cursor.getInt(0);
+                String monhocName = cursor.getString(1);
+                int soluongSV = cursor.getInt(4);
+                int giangvienID = cursor.getInt(2);
+                String giangvienName = cursor.getString(3);
+                String TKB = cursor.getString(5);
+                newmonhoc = new MonHocModel(monhocID, monhocName, soluongSV, giangvienID, giangvienName, TKB);
+            } while(cursor.moveToNext());
+        } else {
+            //failed, do nothing
+        }
+        cursor.close();
+        return newmonhoc;
     }
     // THAO TAC BANG GIANG VIEN
 

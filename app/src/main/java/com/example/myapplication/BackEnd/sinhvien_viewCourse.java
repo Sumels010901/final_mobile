@@ -35,15 +35,15 @@ public class sinhvien_viewCourse extends AppCompatActivity {
         });
         String SV_ID = getIntent().getStringExtra("SV_ID");
         lvCourse = findViewById(R.id.lvCourse);
-        dbHelper = new DBHelper(this);
+        dbHelper = new DBHelper(sinhvien_viewCourse.this);
         listMonHocID = dbHelper.CacMonHoc_SinhVien(SV_ID);
         listMonHoc = new ArrayList<MonHocModel>();
         for (SinhVien_MonHoc sv_mh:listMonHocID){
-            MonHocModel monhoc = new MonHocModel();
+            MonHocModel monhoc = null;
             monhoc = dbHelper.getMHById(Integer.toString(sv_mh.getID_MH()));
             listMonHoc.add(monhoc);
         }
-        adapterCourse = new AdapterCourse(this,R.layout.course_item_lv,listMonHoc);
+        adapterCourse = new AdapterCourse(sinhvien_viewCourse.this, R.layout.course_item_lv, listMonHoc);
         lvCourse.setAdapter(adapterCourse);
 
     }

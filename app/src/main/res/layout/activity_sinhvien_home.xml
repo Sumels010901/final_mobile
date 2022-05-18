@@ -7,12 +7,13 @@
     android:orientation="vertical"
     android:background="@drawable/img"
     tools:context=".BackEnd.sinhvien_home">
+
     <Button
+        android:id="@+id/btnSVback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="left"
-        android:id="@+id/btnSVback"
-        android:text="Back"/>
+        android:text="Log Out" />
     <LinearLayout
         android:layout_marginTop="50dp"
         android:layout_width="wrap_content"
