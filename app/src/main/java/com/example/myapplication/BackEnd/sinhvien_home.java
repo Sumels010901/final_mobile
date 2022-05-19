@@ -14,7 +14,7 @@ import com.example.myapplication.Models.TaiKhoanModel;
 import com.example.myapplication.R;
 
 public class sinhvien_home extends AppCompatActivity {
-    Button btnBack, btnViewInfo, btnViewCourse, btnViewScore, btnViewSchedule;
+    Button btnBack, btnViewInfo, btnViewCourse, btnViewScore;
     DBHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,16 +59,6 @@ public class sinhvien_home extends AppCompatActivity {
                 Intent toScoreView = new Intent(sinhvien_home.this, sinhvien_viewScore.class);
                 toScoreView.putExtra("SV_ID", ID);
                 startActivity(toScoreView);
-            }
-        });
-        btnViewSchedule = findViewById(R.id.btnViewStudentSchedule);
-        btnViewSchedule.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                Intent toScheduleView = new Intent(sinhvien_home.this, sinhvien_viewSchedule.class);
-                toScheduleView.putExtra("SV_ID", ID);
-                startActivity(toScheduleView);
             }
         });
     }
