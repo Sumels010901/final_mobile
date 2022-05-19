@@ -9,6 +9,13 @@
         android:layout_weight="2"
         android:gravity="center"
         android:text="TextView"
+        android:id="@+id/tvEnrollID"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:text="TextView"
         android:id="@+id/tvSV_MH"/>
     <TextView
         android:layout_width="0dp"

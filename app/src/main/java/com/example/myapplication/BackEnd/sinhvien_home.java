@@ -56,8 +56,9 @@ public class sinhvien_home extends AppCompatActivity {
         btnViewScore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent toCourseView = new Intent(sinhvien_home.this, sinhvien_viewScore.class);
-                startActivity(toCourseView);
+                Intent toScoreView = new Intent(sinhvien_home.this, sinhvien_viewScore.class);
+                toScoreView.putExtra("SV_ID", ID);
+                startActivity(toScoreView);
             }
         });
         btnViewSchedule = findViewById(R.id.btnViewStudentSchedule);
@@ -65,8 +66,9 @@ public class sinhvien_home extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent toCourseView = new Intent(sinhvien_home.this, sinhvien_viewSchedule.class);
-                startActivity(toCourseView);
+                Intent toScheduleView = new Intent(sinhvien_home.this, sinhvien_viewSchedule.class);
+                toScheduleView.putExtra("SV_ID", ID);
+                startActivity(toScheduleView);
             }
         });
     }

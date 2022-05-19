@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class enroll extends AppCompatActivity {
     private Button btnBack, btnAdd, btnDelete;
-    private EditText txt_SVID, txt_MHID;
+    private EditText txt_SVID, txt_MHID, txt_EnrollID;
     private ListView lvEnroll;
     private DBHelper dbHelper;
     private EnrollAdapter adapterEnroll;
@@ -38,6 +38,7 @@ public class enroll extends AppCompatActivity {
         });
     }
     public void init(){
+        txt_EnrollID = findViewById(R.id.txtEnrollID);
         txt_MHID = findViewById(R.id.txtMH_SV);
         txt_SVID = findViewById(R.id.txtSV_MH);
         btnBack = findViewById(R.id.btnEnrollBack);
@@ -77,6 +78,15 @@ public class enroll extends AppCompatActivity {
         else if(txt_SVID.getText().toString().equals("")){
             Toast.makeText(this,"Hãy nhập mã sinh viên", Toast.LENGTH_SHORT).show();
         }
+        else if(txt_EnrollID.getText().toString().equals("")){
+            Toast.makeText(this,"Hãy nhập mã lượt", Toast.LENGTH_SHORT).show();
+        }
+        else if(dbHelper.getSvById(txt_SVID.getText().toString())==null){
+            Toast.makeText(this,"Sinh viên không tồn tại", Toast.LENGTH_SHORT).show();
+        }
+        else if(dbHelper.getSvById(txt_MHID.getText().toString())==null){
+            Toast.makeText(this,"Môn học không tồn tại", Toast.LENGTH_SHORT).show();
+        }
         else {
             if(dbHelper.themLuotHoc(getEnrollInfo())) {
                 Toast.makeText(this,"Thêm lượt học thành công", Toast.LENGTH_SHORT).show();
@@ -93,6 +103,7 @@ public class enroll extends AppCompatActivity {
 
     private SinhVien_MonHoc getEnrollInfo() {
         SinhVien_MonHoc svmh = new SinhVien_MonHoc();
+        svmh.setENROLL_ID(Integer.parseInt(txt_EnrollID.getText().toString()));
         svmh.setID_SV(Integer.parseInt(txt_SVID.getText().toString()));
         svmh.setID_MH(Integer.parseInt(txt_MHID.getText().toString()));
         return svmh;
@@ -103,8 +114,7 @@ public class enroll extends AppCompatActivity {
             Toast.makeText(this, "Hãy chọn sinh viên/ môn học", Toast.LENGTH_SHORT).show();
         }
         else {
-            int id = Integer.parseInt(txt_SVID.getText().toString());
-            SinhVien_MonHoc svmh = new SinhVien_MonHoc();
+            SinhVien_MonHoc svmh = getEnrollInfo();
             if (dbHelper.xoaLuotHoc(svmh)) {
                 Toast.makeText(this,"Xóa thành công", Toast.LENGTH_SHORT).show();
                 resetForm();
@@ -117,12 +127,14 @@ public class enroll extends AppCompatActivity {
     private void resetForm() {
         txt_SVID.setText("");
         txt_MHID.setText("");
+        txt_EnrollID.setText("");
         btnAdd.setText("Thêm");
         btnDelete.setEnabled(false);
     }
 
     private void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         SinhVien_MonHoc svmh = listEnroll.get(i);
+        txt_EnrollID.setText(String.valueOf(svmh.getENROLL_ID()));
         txt_SVID.setText(String.valueOf(svmh.getID_SV()));
         txt_MHID.setText(String.valueOf(svmh.getID_MH()));
         btnDelete.setEnabled(true);

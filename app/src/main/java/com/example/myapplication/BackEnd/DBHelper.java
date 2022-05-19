@@ -39,7 +39,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String KN_GV = "KN_GV";//*
     public static final String BANGDIEM_TABLE = "BANGDIEM_TABLE";
     public static final String DIEM = "DIEM";
-    public static final String SV_MH_TABLE = "SV_MH_TABLE";//*
+    public static final String SV_MH_TABLE = "SV_MH_TABLE";
+    public static final String ENROLL_ID = "ENROLL_ID";//*
 
     public DBHelper(@Nullable Context context) {
         super(context, "final_sinhvien.db", null, 1);
@@ -62,7 +63,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String createTableDiemStatement = "CREATE TABLE " + BANGDIEM_TABLE + " (" + ID_SV + " INTEGER PRIMARY KEY, " + ID_MH + " INTEGER, " + DIEM + " DOUBLE)";
         db.execSQL(createTableDiemStatement);
 
-        String createTableSVMHStatement = "CREATE TABLE " + SV_MH_TABLE + " (" + ID_SV + " INTEGER, " + ID_MH + " INTEGER, CONSTRAINT SV_hoc_MH FOREIGN KEY (" + ID_SV +") REFERENCES " + SINHVIEN_TABLE + " (" + ID_SV + "), CONSTRAINT MH_chua_SV FOREIGN KEY (" + ID_MH + ") REFERENCES " + MONHOC_TABLE + " (" + ID_MH + "))";
+        String createTableSVMHStatement = "CREATE TABLE " + SV_MH_TABLE + " (" + ENROLL_ID + " INTEGER PRIMARY KEY, " + ID_SV + " INTEGER, " + ID_MH + " INTEGER, CONSTRAINT SV_hoc_MH FOREIGN KEY (" + ID_SV +") REFERENCES " + SINHVIEN_TABLE + " (" + ID_SV + "), CONSTRAINT MH_chua_SV FOREIGN KEY (" + ID_MH + ") REFERENCES " + MONHOC_TABLE + " (" + ID_MH + "))";
         db.execSQL(createTableSVMHStatement);
     }
 
@@ -143,7 +144,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public SinhVienModel getSvById(String id) {
         SinhVienModel sinhVien = null;
         SQLiteDatabase db = this.getReadableDatabase();
-        String query = "SELECT * FROM " + SINHVIEN_TABLE + " WHERE " + ID_SV +" = '" + id +"'";
+        String query = "SELECT * FROM " + SINHVIEN_TABLE + " WHERE " + ID_SV +" = " + id;
         Cursor cursor = db.rawQuery(query,null);
         if(!cursor.moveToFirst() ||cursor.getCount() == 0){
             return null;
@@ -574,6 +575,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
 
+        cv.put(ENROLL_ID, svmh.getENROLL_ID());
         cv.put(ID_SV, svmh.getID_SV());
         cv.put(ID_MH, svmh.getID_MH());
 
@@ -587,7 +589,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public boolean xoaLuotHoc(SinhVien_MonHoc svmh){
         SQLiteDatabase db = this.getWritableDatabase();
 
-        long delete = db.delete(SV_MH_TABLE, ID_SV+" = "+svmh.getID_SV(), null);
+        long delete = db.delete(SV_MH_TABLE, ENROLL_ID+" = "+svmh.getENROLL_ID(), null);
         if(delete == -1) {
             return false;
         } else {
@@ -605,9 +607,10 @@ public class DBHelper extends SQLiteOpenHelper {
         if(cursor.moveToFirst()){
             //loop through the cursor (result set) and create new bangdiem objects
             do {
-                int sinhvienID = cursor.getInt(0);
-                int monhocID = cursor.getInt(1);
-                SinhVien_MonHoc newbangdiem = new SinhVien_MonHoc(sinhvienID, monhocID);
+                int enrollID = cursor.getInt(0);
+                int sinhvienID = cursor.getInt(1);
+                int monhocID = cursor.getInt(2);
+                SinhVien_MonHoc newbangdiem = new SinhVien_MonHoc(sinhvienID, monhocID, enrollID);
                 returnList.add(newbangdiem);
             } while(cursor.moveToNext());
         } else {
@@ -628,9 +631,10 @@ public class DBHelper extends SQLiteOpenHelper {
         if(cursor.moveToFirst()){
             //loop through the cursor (result set) and create new bangdiem objects
             do {
-                int sinhvienID = cursor.getInt(0);
-                int monhocID = cursor.getInt(1);
-                SinhVien_MonHoc newsvmh = new SinhVien_MonHoc(sinhvienID, monhocID);
+                int enrollID = cursor.getInt(0);
+                int sinhvienID = cursor.getInt(1);
+                int monhocID = cursor.getInt(2);
+                SinhVien_MonHoc newsvmh = new SinhVien_MonHoc(sinhvienID, monhocID, enrollID);
                 returnList.add(newsvmh);
             } while(cursor.moveToNext());
         } else {
@@ -639,6 +643,21 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return returnList;
+    }
+    public SinhVien_MonHoc getsv_mh(SinhVien_MonHoc svmh){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String query = "SELECT * FROM " + SV_MH_TABLE + " WHERE " + ENROLL_ID +" = " + svmh.getENROLL_ID();
+        Cursor cursor = db.rawQuery(query,null);
+        if(!cursor.moveToFirst() ||cursor.getCount() == 0){
+            return null;
+        }
+        else {
+            cursor.moveToFirst();
+            svmh = new SinhVien_MonHoc(cursor.getInt(0),cursor.getInt(1),cursor.getInt(2));
+        }
+
+        db.close();
+        return svmh;
     }
     public ArrayList<SinhVien_MonHoc> getAllEnroll(){
         ArrayList<SinhVien_MonHoc> list = new ArrayList<>();
@@ -652,8 +671,9 @@ public class DBHelper extends SQLiteOpenHelper {
             //loop through the cursor (result set) and create new sinhvien objects
             do {
                 SinhVien_MonHoc svmh = new SinhVien_MonHoc();
-                svmh.setID_SV(cursor.getInt(0));
-                svmh.setID_MH(cursor.getInt(1));
+                svmh.setENROLL_ID(cursor.getInt(0));
+                svmh.setID_SV(cursor.getInt(1));
+                svmh.setID_MH(cursor.getInt(2));
 
                 list.add(svmh);
             } while(cursor.moveToNext());

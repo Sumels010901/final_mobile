@@ -28,7 +28,7 @@ public class EnrollAdapter extends ArrayAdapter<SinhVien_MonHoc> {
         this.listSV_MonHoc = listSV_MonHoc;
     }
     class ViewHolder {
-        TextView tvSV_MH, tvMH_SV;
+        TextView tvSV_MH, tvMH_SV, tvEnrollID;
     }
 
     @NonNull
@@ -38,6 +38,7 @@ public class EnrollAdapter extends ArrayAdapter<SinhVien_MonHoc> {
         if(convertView==null){
             convertView= LayoutInflater.from(context).inflate(R.layout.enroll_item_lv, parent,false);
             viewHolder = new ViewHolder();
+            viewHolder.tvEnrollID = convertView.findViewById(R.id.tvEnrollID);
             viewHolder.tvSV_MH = convertView.findViewById(R.id.tvSV_MH);
             viewHolder.tvMH_SV = convertView.findViewById(R.id.tvMH_SV);
             convertView.setTag(viewHolder);
@@ -46,6 +47,7 @@ public class EnrollAdapter extends ArrayAdapter<SinhVien_MonHoc> {
             viewHolder = (EnrollAdapter.ViewHolder) convertView.getTag();
         }
         SinhVien_MonHoc svmh = listSV_MonHoc.get(position);
+        viewHolder.tvEnrollID.setText(String.valueOf(svmh.getENROLL_ID()));
         viewHolder.tvSV_MH.setText(String.valueOf(svmh.getID_SV()));
         viewHolder.tvMH_SV.setText(String.valueOf(svmh.getID_MH()));
         return convertView;
