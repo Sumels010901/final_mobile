@@ -103,14 +103,14 @@ public class score extends AppCompatActivity {
 
         else {
             if(dbHelper.themBangDiem(getBangDiem())) {
-                Toast.makeText(this,"Thêm gv thành công", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Thêm bảng điểm thành công", Toast.LENGTH_SHORT).show();
                 resetForm();
                 listBangDiem.clear();
                 listBangDiem.addAll(dbHelper.getAllBangDiem());
                 adapter.notifyDataSetChanged();
             }
             else {
-                Toast.makeText(this,"Thêm gv thất bại", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Thêm bảng điểm thất bại", Toast.LENGTH_SHORT).show();
             }
         }
     }
